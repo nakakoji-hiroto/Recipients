@@ -30,7 +30,7 @@
 後日作成予定
 
 ## 開発環境
-- OS：Microsoft Windows
+- OS：Amazon Linux release 2
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
