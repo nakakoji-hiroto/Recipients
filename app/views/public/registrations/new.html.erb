@@ -1,34 +1,43 @@
-<h2>新規会員登録</h2>
+<div class="container pt-3">
+  <h4><span class="page_title col-10 ml-4">新規会員登録</span></h4>
+  <div class="row">
+    <div class="col-md-8 col-10 mx-auto my-5">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :name, 'ユーザーネーム' %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name", placeholder: "TestUser" %>
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :name, 'ユーザーネーム' %><br />
+          <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "TestUser" %>
+        </div>
+
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :email, 'メールアドレス' %><br />
+          <%= f.email_field :email, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %>
+        </div>
+
+        <div class="form-group form-inline  d-flex justify-content-between">
+          <%= f.label :password, "パスワード（※8文字以上）" %>
+            <%# if @minimum_password_length %>
+              <!--※<%#=#@minimum_password_length %> 文字以上　-->
+            <%# end %>
+          <%= f.password_field :password, class:"form-control w-50 border border-dark", placeholder: "※半角英数・記号を各1文字以上含める", autocomplete: "new-password" %>
+        </div>
+
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :password_confirmation, 'パスワード（確認用）' %><br />
+          <%= f.password_field :password_confirmation, class:"form-control w-50 border border-dark", autocomplete: "new-password" %>
+        </div>
+
+        <div class="actions d-flex justify-content-center w-100 mt-5">
+          <%= f.submit "新規登録", class:"btn btn-success border border-dark w-50 mt-3 px-5 py-2" %>
+        </div>
+      <% end %>
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email, 'メールアドレス' %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %>
+  <h5 class="mt-5"><span class="page_title col ml-5">既に会員登録済の方</span></h5>
+  <div class="col-8 py-3 ml-5">
+    <span><strong><%= render "public/shared/links" %>からログインしてください。</strong></span>
   </div>
-
-  <div class="field">
-    <%= f.label :password, 'パスワード' %>
-    <% if @minimum_password_length %>
-    （<%= @minimum_password_length %> 文字以上かつ英数記号の混合）
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, 'パスワード（確認用）' %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
