@@ -11,10 +11,13 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-    <div class="message">
-      <%= flash[:notice] %>
-    </div> 
-    <%= yield %>
+    <div class="contents">
+      <%= render 'layouts/header' %>
+      <main>
+        <%= flash[:notice] %>
+        <%= yield %>
+      </main>
+      <%= render 'layouts/footer' %>
+    </div>
   </body>
 </html>

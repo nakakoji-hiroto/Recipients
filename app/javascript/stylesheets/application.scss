@@ -3,3 +3,22 @@
 .page_title {
   background-color: #FFDBC9;
 }
+
+.header_group, .footer_group{
+  background-color: #800000;
+}
+
+.footer_group {
+  height: 80px;
+}
+
+.contents {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
+  min-height: 100vh;
+}
+
+.welcome {
+  color: #FFF;
+}
