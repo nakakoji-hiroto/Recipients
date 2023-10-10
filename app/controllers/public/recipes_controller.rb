@@ -6,6 +6,7 @@ class Public::RecipesController < ApplicationController
   end
 
   def index
+    @new_recipes = Recipe.order('id DESC').limit(3)
   end
 
   def show

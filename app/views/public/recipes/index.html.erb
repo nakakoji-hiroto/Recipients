@@ -1,2 +1,9 @@
-<h1>Public::Recipes#index</h1>
-<p>Find me in app/views/public/recipes/index.html.erb</p>
+<div class="container pt-4">
+  <h3><span class="page_title col-10 ml-4">レシピ一覧</span></h3>
+  <div class="row">
+    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
+      <%= render 'index', new_recipes: @new_recipes %>
+    </div>
+  </div>
+</div>
+      

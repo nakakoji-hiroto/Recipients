@@ -22,3 +22,11 @@
 .welcome {
   color: #FFF;
 }
+
+.field_with_errors > input {
+  min-width: 305px;
+}
+
+.field_with_errors > textarea {
+  min-width: 305px;
+}

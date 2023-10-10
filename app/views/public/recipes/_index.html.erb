@@ -1,0 +1,17 @@
+<div class="d-flex align-items-center">新着レシピ</div>
+<% new_recipes.each do |recipe| %>
+  <div class="card recipe_card ml-3 p-3 d-flex">
+    <div class="row">
+      <div class="col-4">
+        <%= link_to recipe_path(recipe) do %>
+          <%= image_tag recipe.get_recipe_image(100, 100) %>
+        <% end %>
+      </div>
+      <div class="col-8">
+        <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
+        <%= recipe.catch_copy %><br>
+        投稿者：<%= recipe.user.name %>さん
+      </div>
+    </div>
+  </div>
+<% end %>
