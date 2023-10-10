@@ -1,0 +1,21 @@
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-5">
+      <h2><%= @recipe.title %></h2>
+      <p>投稿者：<%= @recipe.user.name %>さん</p>
+      <p>ジャンル：和食</p>
+      <div class= "catch_copy">
+        <strong><%= @recipe.catch_copy %></strong>
+      </div>
+      <div class="recipe_image mt-3">
+        <%= image_tag @recipe.get_recipe_image(480, 300) %>
+      </div>
+    </div>
+    <div class="col-5 offset-1">
+      <% if @recipe.user == current_user %>
+        <%= link_to 'このレシピを編集する', edit_recipe_path(@recipe), class: "btn btn-success border border-dark mr-3" %>
+        <%= link_to 'このレシピを削除する', recipe_path(@recipe), method: :delete, class: "btn btn-danger border border-dark", data: { confirm: "このレシピを削除します。\nよろしいですか？" } %>
+      <% end %>
+    </div>
+  </div>
+</div>

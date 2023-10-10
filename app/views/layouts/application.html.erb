@@ -14,7 +14,8 @@
     <div class="contents">
       <%= render 'layouts/header' %>
       <main>
-        <%= flash[:notice] %>
+        <%= flash[:notice] %><br>
+        <%= flash[:notice2] %>
         <%= yield %>
       </main>
       <%= render 'layouts/footer' %>

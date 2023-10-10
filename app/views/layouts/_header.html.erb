@@ -1,11 +1,16 @@
 <div class="container-fluid header_group py-4">
   <div class="row">
-    <div class="col-5"></div>
-    <div class="col-5 mx-auto d-flex justify-content-between">
+    <div class="col-5">
       <% if user_signed_in? %>
       <div class="welcome">
         <%= "ようこそ #{current_user.name} さん" %>
       </div>
+      <% end %>
+    </div>
+    <div class="col-5 mx-auto d-flex justify-content-between">
+      <%= link_to 'トップページ', root_path, class: 'btn btn-sm btn-light px-3' %>
+      <% if user_signed_in? %>
+        <%= link_to '新規投稿', new_recipe_path, class: 'btn btn-sm btn-info' %>
         <%= link_to 'ログアウト', destroy_user_session_path, class: 'btn btn-sm btn-danger', method: :delete %>
       <% elsif admin_signed_in? %>
         <strong>管理者用　　</strong>

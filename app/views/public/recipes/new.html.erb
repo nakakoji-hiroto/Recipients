@@ -1,0 +1,34 @@
+<div class="container pt-4">
+  <h3><span class="page_title col-10 ml-4">新規レシピ投稿</span></h3>
+  <div class="row">
+    <div class="col-md-8 col-10 mx-auto my-5">
+      <% if @recipe.errors.any? %>
+        <ul class="alert alert-danger" role="alert">
+          <h6 class="alert-heading">
+            <%= @recipe.errors.count %>件のエラーが発生しました
+          </h6>
+          <% @recipe.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form_with model: @recipe do |f| %>
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :title, 'タイトル' %>
+          <%= f.text_field :title, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "title", placeholder: "レシピ名を入力" %>
+        </div>
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :catch_copy, 'キャッチコピー' %>
+          <%= f.text_area :catch_copy, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "catch_copy", placeholder: "キャッチコピーを入力" %>
+        </div>
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :image, '料理画像' %>
+          <%= f.file_field :image, accept: "image/*", class: "w-50" %>
+        </div>
+        <div class="actions d-flex justify-content-center w-100 mt-4">
+          <%= f.submit "投稿する", class:"btn btn-primary border border-dark w-50 mt-3 px-5 py-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
