@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
   namespace :public do
+    get 'recipe_steps/new'
+    get 'recipe_steps/index'
+  end
+  namespace :public do
     get 'recipe_materials/new'
     get 'recipe_materials/index'
   end
@@ -22,6 +26,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update]
     resources :recipes do
       resources :recipe_materials, only: [:new, :index, :create, :destroy]
+      resources :recipe_steps, only: [:new, :index, :create, :destroy]
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

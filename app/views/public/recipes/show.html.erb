@@ -1,4 +1,4 @@
-<div class="container pt-4">
+<div class="container pt-2">
   <div class="row">
     <div class="col-5">
       <h2><%= @recipe.title %></h2>
@@ -15,7 +15,8 @@
       <% if @recipe.user == current_user %>
         <%= link_to 'このレシピを編集する', edit_recipe_path(@recipe), class: "btn btn-success border border-dark mr-3 mt-2" %>
         <%= link_to 'このレシピを削除する', recipe_path(@recipe), method: :delete, class: "btn btn-danger border border-dark mt-2", data: { confirm: "このレシピを削除します。\nよろしいですか？" } %>
-        <%= link_to '材料の登録へ', new_recipe_recipe_material_path(@recipe), class:"btn btn-info border border-dark mt-2" %>
+        <%= link_to '材料の登録へ', new_recipe_recipe_material_path(@recipe), class:"btn btn-primary border border-dark mt-2 mr-3" %>
+        <%= link_to '手順の登録へ', new_recipe_recipe_step_path(@recipe), class:"btn btn-info border border-dark mt-2" %>
       <% end %>
     </div>
   </div>

@@ -34,8 +34,9 @@
           <%= f.label :quantity, '分量（4人分）' %><br />
           <%= f.text_field :quantity, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "quantity", placeholder: "例）100g　150cc" %>
         </div>
-        <div class="actions d-flex justify-content-center w-100 mt-3">
-          <%= f.submit "材料追加", class:"btn btn-success border border-dark w-50 mt-3 px-5 py-2" %>
+        <div class="actions d-flex justify-content-around w-100 mt-3">
+          <%= f.submit "材料追加", class:"btn btn-sm btn-success border border-dark w-25 mt-3 py-2" %>
+          <%= link_to '戻る', recipe_path(@recipe), class: "btn btn-sm btn-danger border border-dark w-25 mt-3 py-2" %>
         </div>
       <% end %>
       <table class="table material_table mt-3">
