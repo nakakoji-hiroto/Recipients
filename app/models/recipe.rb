@@ -1,6 +1,8 @@
 class Recipe < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  has_many :recipe_marerials, dependent: :destroy
+  has_many :recipe_steps, dependent: :destroy
   
   validates :title, presence: true, length: { in: 2..20 }
   validates :catch_copy, presence: true, length: {maximum: 200 }
