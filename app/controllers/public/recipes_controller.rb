@@ -6,6 +6,7 @@ class Public::RecipesController < ApplicationController
   end
 
   def index
+    @recipe = Recipe.new
     @new_recipes = Recipe.order('id DESC').limit(3)
   end
 
@@ -43,6 +44,11 @@ class Public::RecipesController < ApplicationController
     recipe.destroy
     flash[:notice] = "レシピを削除しました。"
     redirect_to recipes_path
+  end
+  
+  def genre_search
+    @genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id])
+    @genre = Genre.find(recipe_params[:genre_id])
   end
   
   private

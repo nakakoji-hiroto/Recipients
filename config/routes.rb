@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
   
-  # namespace :public do
-  #   get 'recipe_steps/new'
-  #   get 'recipe_steps/index'
-  # end
-  # namespace :public do
-  #   get 'recipe_materials/new'
-  #   get 'recipe_materials/index'
-  # end
   scope module: :admin do
     devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
@@ -30,6 +22,7 @@ Rails.application.routes.draw do
       resources :recipe_materials, only: [:new, :index, :create, :destroy]
       resources :recipe_steps, only: [:new, :index, :create, :destroy]
     end
+    get 'genres/search' => 'recipes#genre_search', as: 'genre_search'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
