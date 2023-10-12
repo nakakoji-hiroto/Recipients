@@ -1,17 +1,19 @@
 Rails.application.routes.draw do
   
-  namespace :public do
-    get 'recipe_steps/new'
-    get 'recipe_steps/index'
-  end
-  namespace :public do
-    get 'recipe_materials/new'
-    get 'recipe_materials/index'
-  end
+  # namespace :public do
+  #   get 'recipe_steps/new'
+  #   get 'recipe_steps/index'
+  # end
+  # namespace :public do
+  #   get 'recipe_materials/new'
+  #   get 'recipe_materials/index'
+  # end
   scope module: :admin do
     devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
-  }
+    }
+    get 'admin' => 'homes#top', as: 'admin'
+    resources :genres, only: [:new, :edit, :create, :update]
   end
 
   scope module: :public do

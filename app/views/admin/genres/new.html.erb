@@ -1,0 +1,45 @@
+<div class="container mx-auto">
+  <h3><span class="page_title col-10 ml-4">ジャンル登録</span></h3>
+  <% if @genre.errors.any? %>
+        <ul class="alert alert-danger" role="alert">
+          <h6 class="alert-heading">
+            <%= @genre.errors.count %>件のエラーが発生しました
+          </h6>
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 col-11 mt-3">
+      <%= form_with model: @genre do |f| %> <!--url: genres_path, method: :post-->
+        <div class="form-group form-inline d-flex">
+          <%= f.label :name, 'ジャンル名', class: "mr-5" %>
+          <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "ジャンル名を入力" %>
+        </div>
+        <div class="actions d-flex justify-content-around w-100 mt-3">
+          <%= f.submit "登録する", class:"btn btn-sm btn-primary border border-dark w-25 mt-3 px-2 py-2" %>
+          <%= link_to '戻る', admin_path, class: "btn btn-sm btn-danger border border-dark w-25 mt-3 px-5 py-2" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-6 col-11">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>登録済ジャンル</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @genres.each do |genre| %>
+            <tr>
+              <td><%= genre.name %></td>
+              <td><%= link_to '編集する', edit_genre_path(genre), class: "btn btn-sm btn-success p-2" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

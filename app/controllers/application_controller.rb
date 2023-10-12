@@ -6,4 +6,5 @@ class ApplicationController < ActionController::Base
       flash[:notice2] = "新規会員登録ページより会員登録を行ってください。"
     end
   end
+  
 end

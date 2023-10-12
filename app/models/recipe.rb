@@ -1,6 +1,7 @@
 class Recipe < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  belongs_to :genre
   has_many :recipe_marerials, dependent: :destroy
   has_many :recipe_steps, dependent: :destroy
   
