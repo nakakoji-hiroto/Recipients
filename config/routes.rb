@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :recipes do
       resources :recipe_materials, only: [:new, :index, :create, :destroy]
       resources :recipe_steps, only: [:new, :index, :create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
     get 'genres/search' => 'recipes#genre_search', as: 'genre_search'
   end

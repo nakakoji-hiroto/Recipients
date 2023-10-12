@@ -4,6 +4,7 @@ class Recipe < ApplicationRecord
   belongs_to :genre
   has_many :recipe_materials, dependent: :destroy
   has_many :recipe_steps, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   validates :title, presence: true, length: { in: 2..20 }
   validates :catch_copy, presence: true, length: {maximum: 200 }
@@ -15,6 +16,10 @@ class Recipe < ApplicationRecord
     end
     image.variant( resize: "#{width}x#{height}^", gravity: "center", crop: "#{width}x#{height}+0+0" )
     #image.variant(resize_to_limit: [width, height]).processed
+  end
+  
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
   end
   
 end

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :recipes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)(?=.*?[\W_])[!-~]{8,}+\z/i.freeze
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'パスワードは半角英数記号を各1文字以上含める必要があります', on: :create }

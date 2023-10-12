@@ -2,7 +2,18 @@
   <div class="row">
     <div class="col-5">
       <h2><%= @recipe.title %></h2>
-      <p>投稿者：<%= @recipe.user.name %>さん</p>
+      <p>
+        投稿者：<%= @recipe.user.name %>さん
+        <% if @recipe.favorited_by?(current_user) %>
+          <%= link_to recipe_favorites_path(@recipe),class: "text-danger", method: :delete do %>
+            💖<%= @recipe.favorites.count %> いいね
+          <% end %>
+        <% else %>
+          <%= link_to recipe_favorites_path(@recipe), method: :post do %>
+            💙<%= @recipe.favorites.count %> いいね
+          <% end %>
+        <% end %>
+      </p>
       <p>ジャンル：<%= @recipe.genre.name %></p>
       <div class= "catch_copy">
         <strong><%= @recipe.catch_copy %></strong>
