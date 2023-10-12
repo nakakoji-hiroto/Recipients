@@ -1,0 +1,9 @@
+<% if recipe.favorited_by?(current_user) %>
+  <%= link_to recipe_favorites_path(recipe),class: "text-danger", method: :delete, remote: true do %>
+    💖<%= recipe.favorites.count %> いいね
+  <% end %>
+<% else %>
+  <%= link_to recipe_favorites_path(recipe), method: :post, remote: true do %>
+    💙<%= recipe.favorites.count %> いいね
+  <% end %>
+<% end %>

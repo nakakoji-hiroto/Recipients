@@ -4,15 +4,7 @@
       <h2><%= @recipe.title %></h2>
       <p>
         投稿者：<%= @recipe.user.name %>さん
-        <% if @recipe.favorited_by?(current_user) %>
-          <%= link_to recipe_favorites_path(@recipe),class: "text-danger", method: :delete do %>
-            💖<%= @recipe.favorites.count %> いいね
-          <% end %>
-        <% else %>
-          <%= link_to recipe_favorites_path(@recipe), method: :post do %>
-            💙<%= @recipe.favorites.count %> いいね
-          <% end %>
-        <% end %>
+        <span id="favorite_buttons_<%= @recipe.id %>"><%= render 'public/favorites/favorite', recipe: @recipe %></span>
       </p>
       <p>ジャンル：<%= @recipe.genre.name %></p>
       <div class= "catch_copy">
