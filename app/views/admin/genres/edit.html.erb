@@ -12,7 +12,7 @@
   <% end %>
   <div class="row">
     <div class="col-md-10 col-11 mt-3">
-      <%= form_with model: @genre do |f| %> <!--url: genres_path, method: :post-->
+      <%= form_with model: @genre do |f| %>
         <div class="form-group form-inline d-flex">
           <%= f.label :name, 'ジャンル名', class: "mr-5" %>
           <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "ジャンル名を入力" %>

@@ -48,6 +48,6 @@ class Public::RecipesController < ApplicationController
   private
   
   def recipe_params
-    params.require(:recipe).permit(:title, :catch_copy, :image)
+    params.require(:recipe).permit(:title, :catch_copy, :genre_id, :image)
   end
 end
