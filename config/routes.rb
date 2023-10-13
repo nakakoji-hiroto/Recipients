@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       resource :favorites, only: [:create, :destroy]
     end
     get 'genres/search' => 'recipes#genre_search', as: 'genre_search'
+    get 'tags/search' => 'tags#tag_search', as: 'tag_search'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

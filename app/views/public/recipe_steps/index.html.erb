@@ -1,2 +1,11 @@
-<h1>Public::RecipeSteps#index</h1>
-<p>Find me in app/views/public/recipe_steps/index.html.erb</p>
+<div class="container mx-auto">
+  <h3><span class="page_title col-10 ml-4">調理手順一覧</span></h3>
+  <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(150, 100) %></span></h4>
+  <div class="row">
+    <div class="col-md-10 col-12 mx-auto d-flex flex-wrap">
+      <%= render 'index', recipe_steps: @recipe_steps, delete_button: @delete_button %>
+    </div>
+  </div>
+  <%= link_to 'レシピページへ戻る', recipe_path(@recipe), class: "btn btn-danger p-2 m-3 w-25" %>
+</div>
+

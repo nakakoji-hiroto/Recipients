@@ -6,6 +6,8 @@ class Public::RecipeMaterialsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_material = RecipeMaterial.new
     @recipe_materials = RecipeMaterial.all
+    @recipe_genre = @recipe.genre.name
+    @recipe_tags = @recipe.tags
   end
 
   def index
@@ -20,6 +22,8 @@ class Public::RecipeMaterialsController < ApplicationController
       redirect_to new_recipe_recipe_material_path(@recipe)
     else
       @recipe_materials = RecipeMaterial.all
+      @recipe_genre = @recipe.genre.name
+      @recipe_tags = @recipe.tags
       render 'new'
     end
   end

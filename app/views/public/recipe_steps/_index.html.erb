@@ -1,0 +1,10 @@
+<% recipe_steps.each do |recipe_step| %>
+  <div class="card step_card d-flex flex-column mr-3 p-3 my-2">
+    <%= image_tag recipe_step.get_recipe_image(100, 100), size: "80x60", class: "mx-auto" %>
+    <%= recipe_step.step %>.<br>
+    <%= recipe_step.explanation %>
+    <% if delete_button %>
+      <%= link_to '削除', recipe_recipe_step_path(@recipe, recipe_step), class: "btn btn-sm btn-danger mt-auto", method: :delete , data: { confirm: "削除しますか？" } %>
+    <% end %>
+  </div>
+<% end %>

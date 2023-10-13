@@ -46,6 +46,7 @@ class Public::RecipesController < ApplicationController
       flash[:notice] = "レシピを更新しました。"
       redirect_to recipe_path(@recipe)
     else
+      @tag_list = @recipe.tags.pluck(:name).join(',')
       render 'edit'
     end
   end

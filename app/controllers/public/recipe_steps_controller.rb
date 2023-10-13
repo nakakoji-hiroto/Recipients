@@ -6,9 +6,13 @@ class Public::RecipeStepsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_step = RecipeStep.new
     @recipe_steps = @recipe.recipe_steps.order('step ASC')
+    @delete_button = true
   end
 
   def index
+    @recipe = Recipe.find(params[:recipe_id])
+    @recipe_steps = @recipe.recipe_steps.order('step ASC')
+    @delete_button = false
   end
 
   def create
