@@ -1,4 +1,4 @@
-<div class="container pt-2">
+<div class="container">
   <div class="row">
     <div class="col-5">
       <h2><%= @recipe.title %></h2>
@@ -7,11 +7,20 @@
         <span id="favorite_buttons_<%= @recipe.id %>"><%= render 'public/favorites/favorite', recipe: @recipe %></span>
       </p>
       <p>ジャンル：<%= @recipe.genre.name %></p>
+      <p>
+        タグ：
+        <% @recipe_tags.each do |tag| %>
+      <span>
+        <%= tag.name %><%#= link_to tag.tag_name, recipe_tags_path(tag_id: tag.id) %>
+        <%= "(#{tag.recipes.count}件)　" %>
+      </span>
+        <% end %>
+      </p>
       <div class= "catch_copy">
         <strong><%= @recipe.catch_copy %></strong>
       </div>
       <div class="recipe_image mt-3">
-        <%= image_tag @recipe.get_recipe_image(480, 300) %>
+        <%= image_tag @recipe.get_recipe_image(380, 250) %>
       </div>
     </div>
     <div class="col-5 offset-1">

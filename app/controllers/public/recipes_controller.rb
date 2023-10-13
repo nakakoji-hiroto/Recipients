@@ -12,12 +12,16 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    @recipe_tags = @recipe.tags
   end
   
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
+    tag_list=params[:recipe][:tag_name].split(/,|\.|、|・/)
     if @recipe.save
+      #新しくつけられたタグを追加保存する
+      @recipe.save_tag(tag_list)
       flash[:notice] = "新規レシピを投稿しました。"
       redirect_to recipe_path(@recipe)
     else
@@ -27,11 +31,18 @@ class Public::RecipesController < ApplicationController
   
   def edit
     @recipe = Recipe.find(params[:id])
+    @tag_list = @recipe.tags.pluck(:name).join(',')
   end
   
   def update
     @recipe = Recipe.find(params[:id])
+    tag_list=params[:recipe][:tag_name].split(/,|\.|、|・/)
     if @recipe.update(recipe_params)
+      #@old_relations = RecipeTag.where(recipe_id: @recipe.id)
+      #@old_relations.each do |relation|
+        #relation.delete
+      #end
+      @recipe.save_tag(tag_list)
       flash[:notice] = "レシピを更新しました。"
       redirect_to recipe_path(@recipe)
     else

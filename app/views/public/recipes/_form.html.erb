@@ -13,6 +13,17 @@
       <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "ジャンルを選択" %>
     </div>
   </div>
+  <% if f.object.new_record? %>
+    <div class="form-group form-inline d-flex justify-content-between">
+      <%= f.label :tag_name, 'タグ 　※「,」で区切ると複数設定可能' %>
+      <%= f.text_field :tag_name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "tag_name", placeholder: "例）定番,お手軽,お弁当" %>
+    </div>
+  <% else %>
+    <div class="form-group form-inline d-flex justify-content-between">
+    <%= f.label :tag_name, 'タグ 　※「,」で区切ると複数設定可能' %>
+    <%= f.text_field :tag_name, class:"form-control w-50 border border-dark", value: tag_list, autofocus: true, autocomplete: "tag_name", placeholder: "例）定番,お手軽,お弁当" %>
+    </div>
+  <% end %>
   <div class="form-group form-inline d-flex justify-content-between">
     <%= f.label :image, '料理画像' %>
     <%= f.file_field :image, accept: "image/*", class: "w-50" %>
