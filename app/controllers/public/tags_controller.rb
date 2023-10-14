@@ -1,6 +1,6 @@
 class Public::TagsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user
+  #before_action :ensure_guest_user
 
   def tag_search
     @tag = Tag.find_by(name: params[:name])

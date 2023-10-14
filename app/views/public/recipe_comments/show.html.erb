@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags %>
+    <div class="col-5 offset-1">
+      <span><%= l @recipe_comment.created_at %>　<%= @recipe_comment.user.name %>さん</span>
+      <table class="table table-borderless w-100">
+        <thead>
+          <tr>
+            <th>レビュー</th>
+            <th></th>
+          </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th>コメント</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="2"><%= @recipe_comment.comment %></td>
+          </tr>
+        </body>
+      </table>
+        <div class="actions d-flex justify-content-between w-100 mt-4">
+          <%= link_to 'レシピへ戻る', recipe_path(@recipe), class: "btn btn-secondary border border-dark mt-3 px-3 py-2" %>
+          <%= link_to 'レビューの一覧へ', recipe_recipe_comments_path(@recipe), class: "btn btn-info border border-dark mt-3 px-3 py-2" %>
+        </div>
+          <% if @recipe_comment.user == current_user %>
+            <%= link_to 'レビューを削除する', recipe_recipe_comment_path(@recipe,@recipe_comment), class: "btn btn-danger border border-dark mt-3 px-3 py-2", method: :delete, data: { confirm: "このレビューを削除しますか？" } %>
+          <% end %>
+    </div>
+  </div>
+</div>

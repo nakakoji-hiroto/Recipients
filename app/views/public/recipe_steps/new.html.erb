@@ -1,15 +1,6 @@
 <div class="container mx-auto">
   <h4>調理手順登録</h4>
-  <% if @recipe_step.errors.any? %>
-        <ul class="alert alert-danger" role="alert">
-          <h6 class="alert-heading">
-            <%= @recipe_step.errors.count %>件のエラーが発生しました
-          </h6>
-          <% @recipe_step.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-  <% end %>
+  <%= render 'layouts/error', object: @recipe_step %>
   <div class="row">
     <div class="col-md-6 col-11 mt-3">
       <%= form_with model: @recipe_step, url: recipe_recipe_steps_path, method: :post do |f| %>

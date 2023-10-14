@@ -1,0 +1,10 @@
+<% if object.errors.any? %>
+  <ul class="alert alert-danger" role="alert">
+    <h6 class="alert-heading">
+      <%= object.errors.count %>件のエラーが発生しました
+    </h6>
+    <% object.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>

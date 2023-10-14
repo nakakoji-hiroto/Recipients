@@ -31,11 +31,23 @@
   min-width: 305px;
 }
 
-.explanation_area {
+.explanation_area, .comment_area{
   min-height: 180px;
 }
 
 .step_card {
   width: 160px;
   max-height: 240px;
+}
+
+.recipe_comment_link {
+  text-decoration: none !important;
+}
+
+.comment_card {
+  width : 300px;
+}
+
+.recipe_card {
+  min-height: 121px;
 }

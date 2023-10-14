@@ -1,0 +1,17 @@
+<div class="container pt-4">
+  <h3><span class="page_title col-10 ml-4"><strong><%= @recipe.title %></strong>　のレビュー</span><span>（全<%= @recipe.recipe_comments.count %>件）</span></h3>
+  <div class="row">
+    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
+      <% @recipe_comments.each do |recipe_comment| %>
+        <div class="comment_card mr-3 mt-3">
+          <%= link_to recipe_recipe_comment_path(@recipe, recipe_comment), class: "recipe_comment_link" do %>
+            <div class="card recipe_card p-3 d-flex w-100 text-dark">
+              <span><%= l recipe_comment.created_at %>　<%= recipe_comment.user.name %>さん</span>
+              <p><%= recipe_comment.comment %></p>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

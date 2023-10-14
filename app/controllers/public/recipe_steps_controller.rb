@@ -1,6 +1,6 @@
 class Public::RecipeStepsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user
+  before_action :ensure_guest_user, except: [:index]
 
   def new
     @recipe = Recipe.find(params[:recipe_id])

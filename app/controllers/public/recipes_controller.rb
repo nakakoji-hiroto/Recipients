@@ -1,6 +1,6 @@
 class Public::RecipesController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user ,except: [:index, :show]
+  before_action :ensure_guest_user ,except: [:index, :show, :genre_search]
   def new
     @recipe = Recipe.new
   end
