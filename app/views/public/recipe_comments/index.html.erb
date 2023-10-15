@@ -7,6 +7,24 @@
           <%= link_to recipe_recipe_comment_path(@recipe, recipe_comment), class: "recipe_comment_link" do %>
             <div class="card recipe_card p-3 d-flex w-100 text-dark">
               <span><%= l recipe_comment.created_at %>　<%= recipe_comment.user.name %>さん</span>
+              <div id="star_<%= recipe_comment.id %>"></div>
+              <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#star_<%= recipe_comment.id %>');
+                if (elem == null) return;
+                
+                elem.innerHTML = "";
+                let opt = {  
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= recipe_comment.score %>",
+                  readOnly: true,
+                  half: true,
+                };
+                raty(elem, opt);
+              });
+              </script>
               <p><%= recipe_comment.comment %></p>
             </div>
           <% end %>

@@ -7,7 +7,26 @@
         <thead>
           <tr>
             <th>レビュー</th>
-            <th></th>
+            <th>
+              <div id="star_<%= @recipe_comment.id %>"></div>
+              <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#star_<%= @recipe_comment.id %>');
+                if (elem == null) return;
+                
+                elem.innerHTML = "";
+                let opt = {  
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  score: "<%= @recipe_comment.score %>",
+                  readOnly: true,
+                  half: true,
+                };
+                raty(elem, opt);
+              });
+              </script>
+            </th>
           </tr>
         </thead>
         <thead>

@@ -4,6 +4,27 @@
     <div class="col-5 offset-1">
       <%= render 'layouts/error', object: @recipe_comment %>
       <%= form_with model: @recipe_comment, url: recipe_recipe_comments_path(@recipe), method: :post do |f| %>
+        <div class="form-group" id="star">
+          <%= f.label :score, 'レビュー' %>
+          <%= f.hidden_field :score, id: :review_star, class: 'form-control' %>
+          <div id="post_raty"></div>
+        </div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#post_raty');
+            if (elem == null) return;
+      
+            elem.innerHTML = ""
+            let opt = {  
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              scoreName: 'recipe_comment[score]',
+              half: true,
+            };
+            raty(elem, opt);
+          });
+        </script>
         <div class="form-group">
           <%= f.label :comment, 'コメント' %>
           <%= f.text_area :comment, class:"form-control w-100 border border-dark comment_area", autofocus: true, autocomplete: "comment", placeholder: "コメントを入力\n（200文字まで）" %>
