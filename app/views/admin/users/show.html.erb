@@ -1,0 +1,27 @@
+<div class="container pt-1">
+  <div class="row d-flex flex-wrap">
+    <div class="col-lg-6 col-md-10 mx-md-auto col-sm-11 mx-sm-auto col-12">
+      <h3><span class="page_title ml-4">会員情報</span></h3>
+      <span id="admin_user_status_<%= @user.id %>"><%= render 'admin/users/show', user: @user %></span>
+      <%= link_to '管理者トップへ戻る', admin_path, class: "btn btn-secondary border border-dark" %>
+    </div>
+    <div class="col-lg-5 col-md-10 mx-md-auto mt-md-3 col-sm-11 mt-sm-3 mt-3 mx-sm-auto col-12 d-flex flex-wrap">
+      <% @user_recipes.each do |recipe| %>
+        <div class="card recipe_card mb-3 p-3 d-flex w-100">
+          <div class="row">
+            <div class="col-4">
+              <%= link_to recipe_path(recipe) do %>
+                <%= image_tag recipe.get_recipe_image(100, 100) %>
+              <% end %>
+            </div>
+            <div class="col-8">
+              <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
+              <%= recipe.catch_copy %><br>
+              投稿者：<%= recipe.user.name %>さん
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<table class="table table-borderless">
+  <tr>
+      <th>ユーザー名</th>
+      <td><%= user.name %></td>
+      <td></td>
+  </tr>
+  <tr>
+      <th>メールアドレス</th>
+      <td><%= user.email %></td>
+      <td></td>
+  </tr>
+  <tr>
+      <th>投稿レシピ数</th>
+      <td><%= user.recipes.count %></td>
+      <td></td>
+  </tr>
+  <tr>
+      <th>フォロー数</th>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <th>フォロワー数</th>
+      <td></td>
+      <td></td>
+  </tr>
+  <tr>
+      <th>ステータス</th>
+      <% if user.is_active %>
+        <td>有効会員</td>
+        <td><%= link_to '利用停止にする', admin_user_path(user), class: "btn btn-sm btn-danger border border-dark", method: :patch, remote: true %></td>
+      <% else %>
+        <td class="text-danger">利用停止</td>
+        <td><%= link_to '有効会員にする', admin_user_path(user), class: "btn btn-sm btn-success border border-dark", method: :patch, remote: true %></td>
+
+      <% end %>
+  </tr>
+</table>
+<div class="is_active_changed_message mb-2"><strong><%= flash[:is_active_changed] %></strong></div>

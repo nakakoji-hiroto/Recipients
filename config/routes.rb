@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     get 'admin' => 'homes#top', as: 'admin'
     resources :genres, only: [:new, :edit, :create, :update]
   end
+  
+  namespace :admin do
+    resources :users ,only: [:show, :update]
+  end
 
   scope module: :public do
     root to: 'homes#top'

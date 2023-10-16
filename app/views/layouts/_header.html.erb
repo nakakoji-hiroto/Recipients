@@ -14,8 +14,8 @@
         <%= link_to '投稿一覧', recipes_path, class: 'btn btn-sm btn-secondary' %>
         <%= link_to 'ログアウト', destroy_user_session_path, class: 'btn btn-sm btn-danger', method: :delete %>
       <% elsif admin_signed_in? %>
-        <strong>管理者用　　</strong>
         <%= link_to 'ログアウト', destroy_admin_session_path, class: 'btn btn-sm btn-dark', method: :delete %>
+        <strong class="text-light bg-danger p-1">管理者用</strong>
       <% else %>
         <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-sm btn-success' %>
         <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-sm ml-3", method: :post %>

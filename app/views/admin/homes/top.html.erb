@@ -1,8 +1,38 @@
 <div class="container pt-1">
-  <h3><span class="page_title col-10 ml-4">会員一覧</span></h3>
-  <%= link_to '新規ジャンル登録', new_genre_path, class: "btn btn-primary" %>
+  <div class="admin_top_title_group d-flex flex-wrap">
+    <h3><span class="page_title col-10 ml-4">会員一覧</span></h3>
+    <%= link_to '新規ジャンル登録', new_genre_path, class: "btn btn-primary offset-1" %>
+  </div>
   <div class="row">
     <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
+      <table class="table mt-2">
+        <thead>
+          <tr>
+            <th>ユーザー名</th>
+            <th>投稿レシピ数</th>
+            <th>フォロー数</th>
+            <th>フォロワー数</th>
+            <th>ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= link_to user.name, admin_user_path(user) %></td>
+              <td><%= user.recipes.count %></td>
+              <td></td>
+              <td></td>
+              <% if user.is_active %>
+                <td>有効会員</td>
+              <% else %>
+                <td class="text-danger">利用停止</td>
+              <% end %>
+              <td><%= link_to '詳細へ', admin_user_path(user), class: "btn btn-sm btn-info border border-dark" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

@@ -5,11 +5,4 @@ class Admin::HomesController < ApplicationController
     @users = User.all
   end
   
-  private
-  
-  def check_admin_sign_in
-    unless admin_signed_in?
-      redirect_to root_path
-    end
-  end
 end

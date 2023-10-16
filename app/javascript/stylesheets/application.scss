@@ -1,11 +1,15 @@
 @use '~bootstrap/scss/bootstrap';
 
+main {
+  background-color: #FFFFEE;
+}
+
 .page_title {
   background-color: #FFDBC9;
 }
 
 .header_group, .footer_group{
-  background-color: #800000;
+  background-color: #A0522D;
 }
 
 .footer_group {
