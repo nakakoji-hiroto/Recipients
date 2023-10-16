@@ -1,0 +1,28 @@
+<h2><%= recipe.title %></h2>
+<p>
+  投稿者：<%= recipe.user.name %>さん
+  💖<span class="text-danger"><%= recipe.favorites.count %></span>
+</p>
+<p>ジャンル：<%= recipe.genre.name %></p>
+<p>
+  タグ：
+  <% recipe_tags.each do |tag| %>
+<span>
+  <%= link_to tag.name + " (#{tag.recipes.count}件)", tag_search_path(name: tag.name) %>　
+</span>
+  <% end %>
+</p>
+<p>
+  ステータス：
+  <% if recipe.is_release %>
+    <span>公開</span>
+  <% else %>
+    <span class="text-danger">非公開</span>
+  <% end %>
+</p>
+<div class= "catch_copy">
+  <strong><%= recipe.catch_copy %></strong>
+</div>
+<div class="recipe_image mt-3">
+  <%= image_tag recipe.get_recipe_image(380, 250) %>
+</div>

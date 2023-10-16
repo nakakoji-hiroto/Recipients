@@ -1,0 +1,46 @@
+<div class="container pt-4">
+  <h3><span class="page_title col-10 ml-4">レシピ一覧</span></h3>
+  <div class="row">
+    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
+      <%= form_with model: @recipe, url: genre_search_path, method: :get do |f| %>
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :genre_id, 'ジャンル', class: "genre_label" %>
+          <div class="form-control w-50 border border-0">
+            <%= f.collection_select(:genre_id, Genre.all, :id, :name, { include_blank: "ジャンルを選択" }, :required => true) %>
+          </div>
+          <%= f.submit "検索する", class:"btn btn-sm btn-info border border-dark ml-3 p-1" %>
+        </div>
+      <% end %>
+      <%= form_with model: @tag, url: tag_search_path, method: :get do |f| %>
+        <div class="form-group form-inline d-flex justify-content-between">
+          <%= f.label :name, 'タグ', class: "tag_label ml-5" %>
+          <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "タグ名を入力" %>
+          <%= f.submit "検索する", class:"btn btn-sm btn-secondary border border-dark p-1" %>
+          <sapn class="text-light bg-danger offset-3"><%= flash[:alert] %></sapn>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-11 col-12 mx-md-auto my-2 d-flex flex-wrap">
+      <% @recipes.each do |recipe| %>
+        <div class="card recipe_card admin_recipe_card ml-2 mt-2 p-3 d-flex">
+          <div class="row">
+            <div class="col-3">
+              <%= link_to admin_recipe_path(recipe) do %>
+                <%= image_tag recipe.get_recipe_image(100, 100) %>
+              <% end %>
+            </div>
+            <div class="col-8 offset-1">
+              <strong><%= link_to recipe.title, admin_recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span>
+              <% unless recipe.is_release %>
+                <strong><span class="text-danger ml-3">※非公開</span></strong>
+              <% end %>
+              <br>
+              <%= recipe.catch_copy %><br>
+              投稿者：<%= recipe.user.name %>さん
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

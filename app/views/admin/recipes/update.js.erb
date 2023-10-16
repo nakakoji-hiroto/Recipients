@@ -1,0 +1,2 @@
+$('#admin_recipe_show_<%= @recipe.id %>').html("<%= j(render "admin/recipes/show", recipe: @recipe, recipe_tags: @recipe_tags) %>");
+$('#admin_recipe_status_<%= @recipe.id %>').html("<%= j(render "admin/recipes/is_release_update", recipe: @recipe) %>");
