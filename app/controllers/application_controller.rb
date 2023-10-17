@@ -13,4 +13,10 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def identification_user(user, path_name)
+    unless user.id == current_user.id
+      redirect_to path_name
+    end
+  end
+  
 end

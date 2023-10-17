@@ -1,6 +1,6 @@
 <div class="container pt-4">
   <% if @tag_search %>
-    <h3><span class="page_title col-10 ml-4">「<%= @tag.name %>」のタグが付いたレシピ　<%= @tag_recipes.count %> 件</span></h3>
+    <h3><span class="page_title col-10 ml-4">「<%= @tag.name %>」のタグが付いたレシピ　<%= @recipe_count %> 件</span></h3>
   <% else %>
     <h3><span class="page_title col-10 ml-4">「<%= @tag %>」のタグが付いたレシピ　<%= @tag_recipes %> 件</span></h3>
   <% end %>
@@ -8,20 +8,22 @@
     <% if @tag_search %>
     <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
       <% @tag_recipes.each do |recipe| %>
-        <div class="card recipe_card ml-3 p-3 d-flex">
-          <div class="row">
-            <div class="col-4">
-              <%= link_to recipe_path(recipe) do %>
-                <%= image_tag recipe.get_recipe_image(100, 100) %>
-              <% end %>
-            </div>
-            <div class="col-8">
-              <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
-              <%= recipe.catch_copy %><br>
-              投稿者：<%= recipe.user.name %>さん
+        <% if recipe.is_release %>
+          <div class="card recipe_card ml-3 p-3 d-flex">
+            <div class="row">
+              <div class="col-4">
+                <%= link_to recipe_path(recipe) do %>
+                  <%= image_tag recipe.get_recipe_image(100, 100) %>
+                <% end %>
+              </div>
+              <div class="col-8">
+                <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
+                <%= recipe.catch_copy %><br>
+                投稿者：<%= recipe.user.name %>さん
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
     <% end %>

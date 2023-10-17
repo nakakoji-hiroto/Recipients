@@ -1,9 +1,17 @@
 ja:
   activerecord:
     models:
+      user: ユーザー
+      genre: ジャンル
       recipe_material: 材料
       recipe_comment: レビュー
     attributes:
+      user:
+        name: ユーザー名
+        email: メールアドレス
+        password: パスワード
+      genre:
+        name: ジャンル名
       recipe_material:
         name: 材料名
         quantity: 分量

@@ -1,0 +1,39 @@
+<!--フォロー機能実装時の表示とボタン-->
+<!--<#% if user == current_user %>-->
+<!--  <table class="table table-borderless">-->
+<!--    <tr>-->
+<!--        <th class="text-danger"><strong>フォロー中</strong></th>-->
+<!--        <td>-->
+<!--          <%# if %>-->
+<!--            <%#= link_to '利用停止にする', admin_user_path(user), class: "btn btn-sm btn-danger border border-dark", method: :patch, remote: true %>-->
+<!--          <%# else %>-->
+<!--            <%#= link_to '有効会員にする', admin_user_path(user), class: "btn btn-sm btn-success border border-dark", method: :patch, remote: true %>-->
+<!--          <%# end %>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--  </table>-->
+<!--<%# end %>-->
+
+<table class="table table-borderless">
+  <tr>
+      <th>ユーザー名</th>
+      <td><%= user.name %></td>
+  </tr>
+  <tr>
+      <th>メールアドレス</th>
+      <td><%= user.email %></td>
+  </tr>
+  <tr>
+      <th>投稿レシピ数</th>
+      <td><%= user.recipes.count %></td>
+  </tr>
+  <tr>
+      <th>フォロー数</th>
+      <td></td>
+  </tr>
+  <tr>
+      <th>フォロワー数</th>
+      <td></td>
+  </tr>
+</table>
+

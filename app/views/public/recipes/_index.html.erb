@@ -1,16 +1,18 @@
 <% new_recipes.each do |recipe| %>
-  <div class="card recipe_card ml-3 p-3 d-flex w-50">
-    <div class="row">
-      <div class="col-4">
-        <%= link_to recipe_path(recipe) do %>
-          <%= image_tag recipe.get_recipe_image(100, 100) %>
-        <% end %>
-      </div>
-      <div class="col-8">
-        <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
-        <%= recipe.catch_copy %><br>
-        投稿者：<%= recipe.user.name %>さん
+  <% if recipe.is_release %>
+    <div class="card recipe_card ml-3 p-3 d-flex w-50">
+      <div class="row">
+        <div class="col-4">
+          <%= link_to recipe_path(recipe) do %>
+            <%= image_tag recipe.get_recipe_image(100, 100) %>
+          <% end %>
+        </div>
+        <div class="col-8">
+          <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
+          <%= recipe.catch_copy %><br>
+          投稿者：<%= recipe.user.name %>さん
+        </div>
       </div>
     </div>
-  </div>
+  <% end %>
 <% end %>

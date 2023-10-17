@@ -12,6 +12,9 @@ class Public::RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    unless @recipe.is_release
+      redirect_to recipes_path
+    end
     @recipe_tags = @recipe.tags
   end
   
@@ -61,6 +64,14 @@ class Public::RecipesController < ApplicationController
   def genre_search
     @genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id])
     @genre = Genre.find(recipe_params[:genre_id])
+    #非公開になっているレシピの件数をカウントする
+    @private_recipe_count = 0
+      @genre_recipes.each do |genre_recipe|
+        unless genre_recipe.is_release
+          @private_recipe_count += 1
+        end
+      end
+    @recipe_count = @genre_recipes.count - @private_recipe_count
   end
   
   private

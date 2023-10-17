@@ -1,10 +1,10 @@
 <div class="container pt-4">
   <div class="review_title d-flex flex-wrap">
-    <h3><span class="page_title col-10 ml-4"><strong><%= @recipe.title %></strong>　のレビュー</span><span>（全<%= @recipe.recipe_comments.count %>件）</span></h3>
+    <h3><span class="page_title col-10 ml-4"><strong><%= @recipe.title %></strong>　のレビュー</span><span>（全<%= @review_count %>件）</span></h3>
       <%= form_with url: recipe_recipe_comments_path(@recipe), method: :get do |f| %>
       <div class="form-group form-inline d-flex justify-content-between ml-3">
         <%= f.select :sort, @choices %>
-        <%= f.submit "並び変える", class:"btn btn-sm btn-info border border-dark" %>
+        <%= f.submit "並び変える", class:"btn btn-sm btn-info border border-dark ml-2" %>
         <%= link_to 'レシピへ戻る', recipe_path(@recipe), class:"btn btn-danger border border-dark ml-2" %>
       </div>
       <% end %>
@@ -12,32 +12,34 @@
   <div class="row">
     <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
       <% @recipe_comments.each do |recipe_comment| %>
-        <div class="comment_card mr-3 mt-3">
-          <%= link_to recipe_recipe_comment_path(@recipe, recipe_comment), class: "recipe_comment_link" do %>
-            <div class="card recipe_card p-3 d-flex w-100 text-dark">
-              <span><%= l recipe_comment.created_at %>　<%= recipe_comment.user.name %>さん</span>
-              <div id="star_<%= recipe_comment.id %>"></div>
-              <script>
-              $(document).on('turbolinks:load', function() {
-                let elem = document.querySelector('#star_<%= recipe_comment.id %>');
-                if (elem == null) return;
-
-                elem.innerHTML = "";
-                let opt = {
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  starHalf: "<%= asset_path('star-half.png') %>",
-                  score: "<%= recipe_comment.score %>",
-                  readOnly: true,
-                  half: true,
-                };
-                raty(elem, opt);
-              });
-              </script>
-              <p><%= recipe_comment.comment %></p>
-            </div>
-          <% end %>
-        </div>
+        <% if recipe_comment.is_release %>
+          <div class="comment_card mr-3 mt-3">
+            <%= link_to recipe_recipe_comment_path(@recipe, recipe_comment), class: "recipe_comment_link" do %>
+              <div class="card recipe_card p-3 d-flex w-100 text-dark">
+                <span><%= l recipe_comment.created_at %>　<%= recipe_comment.user.name %>さん</span>
+                <div id="star_<%= recipe_comment.id %>"></div>
+                <script>
+                $(document).on('turbolinks:load', function() {
+                  let elem = document.querySelector('#star_<%= recipe_comment.id %>');
+                  if (elem == null) return;
+  
+                  elem.innerHTML = "";
+                  let opt = {
+                    starOn: "<%= asset_path('star-on.png') %>",
+                    starOff: "<%= asset_path('star-off.png') %>",
+                    starHalf: "<%= asset_path('star-half.png') %>",
+                    score: "<%= recipe_comment.score %>",
+                    readOnly: true,
+                    half: true,
+                  };
+                  raty(elem, opt);
+                });
+                </script>
+                <p><%= recipe_comment.comment %></p>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>

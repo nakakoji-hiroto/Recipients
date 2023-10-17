@@ -10,8 +10,11 @@
     <div class="col-5 mx-auto d-flex justify-content-between">
       <%= link_to 'トップページ', root_path, class: 'btn btn-sm btn-light px-3' %>
       <% if user_signed_in? %>
-        <%= link_to '新規投稿', new_recipe_path, class: 'btn btn-sm btn-info' %>
-        <%= link_to '投稿一覧', recipes_path, class: 'btn btn-sm btn-secondary' %>
+        <% unless current_user.email == "guest@example.com" %>
+          <%= link_to 'マイページ', user_path(current_user), class: 'btn btn-sm btn-primary' %>
+          <%= link_to '会員一覧', users_path, class: 'btn btn-sm btn-light' %>
+        <% end %>
+        <%= link_to '投稿一覧', recipes_path, class: 'btn btn-sm btn-info' %>
         <%= link_to 'ログアウト', destroy_user_session_path, class: 'btn btn-sm btn-danger', method: :delete %>
       <% elsif admin_signed_in? %>
         <%= link_to '投稿一覧', admin_recipes_path, class: 'btn btn-sm btn-success' %>

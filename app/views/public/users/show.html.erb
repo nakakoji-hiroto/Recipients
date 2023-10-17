@@ -1,2 +1,37 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container pt-1">
+  <div class="row d-flex flex-wrap">
+    <div class="col-lg-6 col-md-10 mx-md-auto col-sm-11 mx-sm-auto col-12">
+      <% if @user == current_user %>
+        <h3><span class="page_title ml-4">マイページ</span></h3>
+      <% else %>
+        <h3><span class="page_title ml-4">会員情報</span></h3>
+      <% end %>
+      <span id="user_status_<%= @user.id %>"><%= render 'public/users/show', user: @user %></span>
+      <%= link_to '会員一覧へ戻る', users_path, class: "btn btn-secondary border border-dark" %>
+      <% if @user == current_user %>
+        <div class="my_page_button_group d-flex mt-3">
+          <%= link_to '新規投稿', new_recipe_path, class: "btn btn-info border border-dark" %>
+          <%= link_to '情報編集へ', edit_user_path(current_user), class: "btn btn-success border border-dark offset-1" %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-lg-5 col-md-10 mx-md-auto mt-md-3 col-sm-11 mt-sm-3 mt-3 mx-sm-auto col-12 d-flex flex-wrap">
+      <% @user_recipes.each do |recipe| %>
+        <div class="card recipe_card mb-3 p-3 d-flex w-100">
+          <div class="row">
+            <div class="col-4">
+              <%= link_to recipe_path(recipe) do %>
+                <%= image_tag recipe.get_recipe_image(100, 100) %>
+              <% end %>
+            </div>
+            <div class="col-8">
+              <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
+              <%= recipe.catch_copy %><br>
+              投稿者：<%= recipe.user.name %>さん
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

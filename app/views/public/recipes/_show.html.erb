@@ -8,9 +8,17 @@
   <p>
     タグ：
     <% recipe_tags.each do |tag| %>
-  <span>
-    <%= link_to tag.name + " (#{tag.recipes.count}件)", tag_search_path(name: tag.name) %>　
-  </span>
+      <% private_recipe_count = 0 %>
+      <% tag.recipes.each do |tag_recipe| %>
+        <!--非公開になっているレシピの件数をカウントする-->
+         <% unless tag_recipe.is_release %>
+           <% private_recipe_count += 1 %>
+         <% end %>
+      <% end %>
+      <% recipe_count = tag.recipes.count - private_recipe_count %>
+      <span>
+        <%= link_to tag.name + " (#{recipe_count}件)", tag_search_path(name: tag.name) %>　
+      </span>
     <% end %>
   </p>
   <div class= "catch_copy">

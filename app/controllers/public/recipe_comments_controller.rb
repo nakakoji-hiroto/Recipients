@@ -5,6 +5,12 @@ class Public::RecipeCommentsController < ApplicationController
   def new
     @recipe_comment = RecipeComment.new
     @recipe = Recipe.find(params[:recipe_id])
+    unless @recipe.is_release
+      redirect_to recipes_path
+    end
+    if @recipe.user == current_user
+      redirect_to recipe_path(@recipe)
+    end
     @recipe_tags = @recipe.tags
   end
 
@@ -23,9 +29,22 @@ class Public::RecipeCommentsController < ApplicationController
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
+    unless @recipe.is_release
+      redirect_to recipes_path
+    end
     @recipe_comment = RecipeComment.new
+    @recipe_comments = @recipe.recipe_comments
+    @private_recipe_comment_count = 0
     @choices = {評価の高い順に: 'high_rating', 日付の新しい順に: 'new', 日付の古い順に: 'old'}
     sort = params[:sort]
+    #非公開になっているレビューの件数をカウントする
+    @recipe_comments.each do |recipe_comment|
+      unless recipe_comment.is_release
+        @private_recipe_comment_count += 1
+      end
+    end
+    @review_count = @recipe_comments.count - @private_recipe_comment_count
+    
     case sort
       when 'high_rating'
         @recipe_comments = @recipe.recipe_comments.order('score DESC')
@@ -41,8 +60,14 @@ class Public::RecipeCommentsController < ApplicationController
   end
 
   def show
-    @recipe_comment = RecipeComment.find(params[:id])
     @recipe = Recipe.find(params[:recipe_id])
+    @recipe_comment = RecipeComment.find(params[:id])
+    unless @recipe.is_release
+      redirect_to recipes_path
+    end
+    unless @recipe_comment.is_release
+      redirect_to recipe_recipe_comments_path(@recipe)
+    end
     @recipe_tags = @recipe.tags
   end
 
