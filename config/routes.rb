@@ -1,16 +1,21 @@
 Rails.application.routes.draw do
-  
+
   scope module: :admin do
     devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
     }
     get 'admin' => 'homes#top', as: 'admin'
+    get 'admin/recipes/:recipe_id/recipe_steps' => 'recipe_steps#index', as: 'admin_recipe_steps'
     resources :genres, only: [:new, :edit, :create, :update]
+    get 'admin/genres/search' => 'recipes#genre_search', as: 'admin_genre_search'
+    get 'admin/tags/search' => 'tags#tag_search', as: 'admin_tag_search'
   end
-  
+
   namespace :admin do
     resources :users ,only: [:show, :update]
-    resources :recipes ,only: [:index, :show, :update]
+    resources :recipes ,only: [:index, :show, :update] do
+      resources :recipe_comments ,only: [:index, :show, :update]
+    end
   end
 
   scope module: :public do

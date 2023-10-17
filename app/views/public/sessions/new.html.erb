@@ -13,7 +13,7 @@
           <%= f.label :password, 'パスワード' %><br />
           <%= f.password_field :password, class:"form-control w-50 border border-dark", autocomplete: "current-password" %>
         </div>
-      
+        <div class="invalid_user_alert text-danger"><%= flash[:alert] %></div>
         <div class="actions d-flex justify-content-center w-100 mt-5">
           <%= f.submit "ログイン", class:"btn btn-info border border-dark w-50 mt-3 px-5 py-2" %>
         </div>

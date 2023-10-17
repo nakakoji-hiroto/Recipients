@@ -5,8 +5,8 @@
     </div>
     <div class="col-md-5 offset-md-1 col-12">
       <span id="admin_recipe_status_<%= @recipe.id %>"><%= render 'admin/recipes/is_release_update', recipe: @recipe %></span>
-      <%#= link_to 'レシピを見る', recipe_recipe_steps_path(@recipe), class:"btn btn-secondary border border-dark mt-2 mr-3" %>
-      <%#= link_to 'レビューを見る', recipe_recipe_comments_path(@recipe), class:"btn btn-light border border-dark mt-2" %>
+      <%= link_to 'レシピを見る', admin_recipe_steps_path(@recipe), class:"btn btn-light border border-dark mt-2 mr-2" %>
+      <%= link_to 'レビューを見る', admin_recipe_recipe_comments_path(@recipe), class:"btn btn-info border border-dark mt-2 mr-2" %>
       <%= link_to 'レシピ一覧へ戻る', admin_recipes_path, class: "btn btn-secondary border border-dark mt-2" %>
     </div>
   </div>

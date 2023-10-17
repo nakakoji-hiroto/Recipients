@@ -1,0 +1,1 @@
+$('#admin_recipe_comment_status_<%= @recipe_comment.id %>').html("<%= j(render "admin/recipe_comments/is_release_update", recipe: @recipe, recipe_comment: @recipe_comment) %>");

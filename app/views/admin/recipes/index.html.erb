@@ -2,16 +2,14 @@
   <h3><span class="page_title col-10 ml-4">レシピ一覧</span></h3>
   <div class="row">
     <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
-      <%= form_with model: @recipe, url: genre_search_path, method: :get do |f| %>
+      <%= form_with model: @recipe, url: admin_genre_search_path, method: :get do |f| %>
         <div class="form-group form-inline d-flex justify-content-between">
-          <%= f.label :genre_id, 'ジャンル', class: "genre_label" %>
-          <div class="form-control w-50 border border-0">
-            <%= f.collection_select(:genre_id, Genre.all, :id, :name, { include_blank: "ジャンルを選択" }, :required => true) %>
-          </div>
+          <%= f.label :genre_id, 'ジャンル', class: "genre_label mr-3" %>
+          <%= f.collection_select(:genre_id, Genre.all, :id, :name, { include_blank: "ジャンルを選択" }, :required => true) %>
           <%= f.submit "検索する", class:"btn btn-sm btn-info border border-dark ml-3 p-1" %>
         </div>
       <% end %>
-      <%= form_with model: @tag, url: tag_search_path, method: :get do |f| %>
+      <%= form_with model: @tag, url: admin_tag_search_path, method: :get do |f| %>
         <div class="form-group form-inline d-flex justify-content-between">
           <%= f.label :name, 'タグ', class: "tag_label ml-5" %>
           <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "タグ名を入力" %>

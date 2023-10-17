@@ -1,0 +1,16 @@
+<div class="container mx-auto">
+  <h3><span class="page_title col-10 ml-4">調理手順一覧</span></h3>
+  <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(150, 100) %></span></h4>
+  <div class="row">
+    <div class="col-md-10 col-12 mx-auto d-flex flex-wrap">
+      <% @recipe_steps.each do |recipe_step| %>
+        <div class="card step_card d-flex flex-column mr-3 p-3 my-2">
+          <%= image_tag recipe_step.get_recipe_image(100, 100), size: "80x60", class: "mx-auto" %>
+          <%= recipe_step.step %>.<br>
+          <%= recipe_step.explanation %>
+        </div>
+      <% end %>>
+    </div>
+  </div>
+  <%= link_to 'レシピページへ戻る', admin_recipe_path(@recipe), class: "btn btn-danger p-2 m-3 w-25" %>
+</div>

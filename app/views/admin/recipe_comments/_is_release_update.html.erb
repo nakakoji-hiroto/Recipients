@@ -1,0 +1,56 @@
+<span><%= l recipe_comment.created_at %>　<%= recipe_comment.user.name %>さん</span>
+<table class="table table-borderless w-100">
+  <thead>
+    <tr>
+      <th>レビュー</th>
+      <th>
+        <div class="d-flex">
+          <div id="star_<%= recipe_comment.id %>"></div>
+          <% unless recipe_comment.is_release %>
+            <span class="text-danger text-lg ml-3"><strong>※非公開</strong></span>
+          <% end %>
+        </div>
+        <script>
+        $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#star_<%= recipe_comment.id %>');
+          if (elem == null) return;
+          
+          elem.innerHTML = "";
+          let opt = {  
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            score: "<%= recipe_comment.score %>",
+            readOnly: true,
+            half: true,
+          };
+          raty(elem, opt);
+        });
+        </script>
+      </th>
+    </tr>
+  </thead>
+  <thead>
+    <tr>
+      <th>コメント</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2"><%= recipe_comment.comment %></td>
+    </tr>
+  </tbody>
+</table>
+<div class="actions d-flex justify-content-between w-100 mt-4">
+<%= link_to 'レシピへ戻る', admin_recipe_path(recipe), class: "btn btn-secondary border border-dark mt-3 px-3 py-2" %>
+<%= link_to 'レビューの一覧へ', admin_recipe_recipe_comments_path(recipe), class: "btn btn-info border border-dark mt-3 px-3 py-2" %>
+</div>
+<div class="review_is_release_update">
+  <% if recipe_comment.is_release %>
+    <%= link_to 'このレビューを非公開にする', admin_recipe_recipe_comment_path(recipe, recipe_comment), method: :patch, class: "btn btn-danger border border-dark mt-2" %>
+  <% else %>
+    <%= link_to 'このレビューを公開する', admin_recipe_recipe_comment_path(recipe, recipe_comment), method: :patch, class: "btn btn-success border border-dark mt-2" %>
+  <% end %>
+</div>
+<div class="review_is_release_changed_message"><%= flash.now[:review_is_release_changed] %></div>

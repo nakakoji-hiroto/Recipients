@@ -26,8 +26,8 @@ class Admin::RecipesController < ApplicationController
   end
   
   def genre_search
-    @genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id])
-    @genre = Genre.find(recipe_params[:genre_id])
+    @genre_recipes = Recipe.where(genre_id: params[:recipe][:genre_id])
+    @genre = Genre.find(params[:recipe][:genre_id])
   end
   
 end
