@@ -21,7 +21,9 @@
             <% if user.email != "guest@example.com" && user.is_active %>
               <tr>
                 <td><%= link_to user.name, user_path(user) %></td>
-                <td><%= user.recipes.count %></td>
+                <td>
+                  <%= user.recipes.where(is_release: true).count %>
+                </td>
                 <td></td>
                 <td></td>
   <!--フォロー機能を実装したら、ここにフォロー表示とボタンを設置-->

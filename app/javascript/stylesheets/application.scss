@@ -56,6 +56,10 @@ main {
   min-height: 121px;
 }
 
-.admin_recipe_card {
+.admin_recipe_card, .recipe_card {
   width: 410px;
+}
+
+.form-control.select_form {
+  background-color: #FFFFEE;
 }

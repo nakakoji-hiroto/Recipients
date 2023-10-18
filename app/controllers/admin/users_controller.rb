@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_recipes = @user.recipes
+    @user_recipes = @user.recipes.page(params[:page]).per(4)
   end
 
   def update

@@ -7,7 +7,9 @@ class Public::RecipesController < ApplicationController
 
   def index
     @recipe = Recipe.new
-    @recipes = Recipe.all
+    indicate_recipes = Recipe.where(is_release: true)
+    # 公開中のレシピのみページネーションして表示する
+    @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
     @new_recipes = Recipe.order('id DESC').limit(3)
   end
 

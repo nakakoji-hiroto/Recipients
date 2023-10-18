@@ -3,7 +3,7 @@ class Admin::RecipesController < ApplicationController
   
   def index
     @recipe = Recipe.new
-    @recipes = Recipe.all
+    @recipes = Recipe.page(params[:page]).per(10)
   end
 
   def show

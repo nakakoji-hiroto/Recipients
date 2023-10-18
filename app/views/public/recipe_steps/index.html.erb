@@ -1,6 +1,24 @@
 <div class="container mx-auto">
-  <h3><span class="page_title col-10 ml-4">調理手順一覧</span></h3>
-  <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(150, 100) %></span></h4>
+  <h3><span class="page_title col-10 offset-1">調理手順一覧</span></h3>
+  <div class="recipe_top_information d-flex justify-content-around mt-4">
+    <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(150, 100) %></span></h4>
+    <table class="table table-sm w-25">
+      <thead>
+        <tr>
+          <th>材料名</th>
+          <th>分量（4人分）</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe.recipe_materials.each do |recipe_material| %>
+        <tr>
+          <td><%= recipe_material.name %></td>
+          <td><%= recipe_material.quantity %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
   <div class="row">
     <div class="col-md-10 col-12 mx-auto d-flex flex-wrap">
       <%= render 'index', recipe_steps: @recipe_steps, delete_button: @delete_button %>

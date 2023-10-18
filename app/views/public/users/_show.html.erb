@@ -25,7 +25,7 @@
   </tr>
   <tr>
       <th>投稿レシピ数</th>
-      <td><%= user.recipes.count %></td>
+      <td><%= user.recipes.where(is_release: true).count %></td>
   </tr>
   <tr>
       <th>フォロー数</th>
