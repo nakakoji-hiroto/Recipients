@@ -1,13 +1,16 @@
-<div class="container-fluid header_group py-4">
+<div class="container-fluid header_group py-3">
   <div class="row">
-    <div class="col-5">
+    <div class="col-5 d-flex justify-content-around py-1">
+      <%= link_to root_path do %>
+        <%= image_tag 'rogo1.png', size: '200x70' %>
+      <% end %>
       <% if user_signed_in? %>
-      <div class="welcome">
+      <div class="welcome py-4">
         <%= "ようこそ #{current_user.name} さん" %>
       </div>
       <% end %>
     </div>
-    <div class="col-5 mx-auto d-flex justify-content-between">
+    <div class="col-5 mx-auto d-flex justify-content-between py-4">
       <%= link_to 'トップページ', root_path, class: 'btn btn-sm btn-light px-3' %>
       <% if user_signed_in? %>
         <% unless current_user.email == "guest@example.com" %>

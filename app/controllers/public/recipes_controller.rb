@@ -10,7 +10,29 @@ class Public::RecipesController < ApplicationController
     indicate_recipes = Recipe.where(is_release: true)
     # 公開中のレシピのみページネーションして表示する
     @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
+    @criteria_choice = {いいねが多い順に: 'favorite', 閲覧数が多い順に: 'many_views', 難易度が易しい順に: 'easy'}
+    @display_choice = {　5件: 5,　10件: 10,　30件: 30,　50件: 50,　100件: 100}
     @new_recipes = Recipe.order('id DESC').limit(3)
+    criteria = params[:criteria]
+    display = params[:display]
+    case criteria
+      when 'favorite'
+        #すべての投稿レシピから「公開」状態のものを抽出 >> 各レシピにつけられたいいね数の多い順に並び替え
+        filtered_recipes = Recipe.where(is_release: true).includes(:favorites).sort_by { |recipe| -recipe.favorites.count }
+        #抽出結果が格納された配列の先頭から、フォームから受け取った件数分のデータを抽出する。
+        filtered_recipes_display = filtered_recipes.first(display.to_i)
+        #Kaminariでページネーションして,viewページに渡す。
+        @recipes = Kaminari.paginate_array(filtered_recipes_display).page(params[:page])
+        flash.now[:filter_result] = "いいねが多い順に#{display}件、表示しました。"
+        @filtered = true
+      when 'many_views'
+        @filtered_recipes = @recipe.recipe_comments.order('id DESC')
+      when 'easy'
+        @filtered_recipes = @recipe.recipe_comments.order('id ASC')
+      else
+        @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
+        @filtered = false
+    end
   end
 
   def show
@@ -69,13 +91,6 @@ class Public::RecipesController < ApplicationController
     @genre = Genre.find(recipe_params[:genre_id])
     #非公開になっているレシピの件数をカウントする
     @recipe_count = @genre_recipes.where(is_release: true).count
-    # @private_recipe_count = 0
-    #   @genre_recipes.each do |genre_recipe|
-    #     unless genre_recipe.is_release
-    #       @private_recipe_count += 1
-    #     end
-    #   end
-    # @recipe_count = @genre_recipes.count - @private_recipe_count
   end
   
   private
