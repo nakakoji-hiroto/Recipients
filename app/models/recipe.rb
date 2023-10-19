@@ -8,6 +8,7 @@ class Recipe < ApplicationRecord
   has_many :recipe_tags,dependent: :destroy
   has_many :tags,through: :recipe_tags
   has_many :recipe_comments, dependent: :destroy
+  has_many :view_counts, dependent: :destroy
   
   validates :title, presence: true, length: { in: 2..20 }
   validates :catch_copy, presence: true, length: {maximum: 200 }

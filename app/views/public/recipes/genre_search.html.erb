@@ -12,7 +12,8 @@
                 <% end %>
               </div>
               <div class="col-8">
-                <strong><%= link_to recipe.title, recipe_path(recipe) %></strong> 💖<span class="text-danger"><%= recipe.favorites.count %></span><br>
+                <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
+                💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span><br>
                 <%= recipe.catch_copy %><br>
                 投稿者：<%= recipe.user.name %>さん
               </div>

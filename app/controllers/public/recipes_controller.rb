@@ -26,7 +26,14 @@ class Public::RecipesController < ApplicationController
         flash.now[:filter_result] = "いいねが多い順に#{display}件、表示しました。"
         @filtered = true
       when 'many_views'
-        @filtered_recipes = @recipe.recipe_comments.order('id DESC')
+        #すべての投稿レシピから「公開」状態のものを抽出 >> 各レシピごとの閲覧数の多い順に並び替え
+        filtered_recipes = Recipe.where(is_release: true).includes(:view_counts).sort_by { |recipe| -recipe.view_counts.count }
+        #抽出結果が格納された配列の先頭から、フォームから受け取った件数分のデータを抽出する。
+        filtered_recipes_display = filtered_recipes.first(display.to_i)
+        #Kaminariでページネーションして,viewページに渡す。
+        @recipes = Kaminari.paginate_array(filtered_recipes_display).page(params[:page])
+        flash.now[:filter_result] = "閲覧数が多い順に#{display}件、表示しました。"
+        @filtered = true
       when 'easy'
         @filtered_recipes = @recipe.recipe_comments.order('id ASC')
       else
@@ -39,6 +46,12 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     unless @recipe.is_release
       redirect_to recipes_path
+    end
+    #投稿閲覧数のカウント　-- 自分が投稿したレシピを自分自身で閲覧しても閲覧数としてカウントしない。
+    unless ViewCount.find_by(user_id: current_user.id, recipe_id: @recipe.id)
+      unless @recipe.user == current_user
+        current_user.view_counts.create(recipe_id: @recipe.id)
+      end
     end
     @recipe_tags = @recipe.tags
   end

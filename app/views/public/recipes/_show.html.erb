@@ -2,7 +2,7 @@
   <h2><%= recipe.title %></h2>
   <p>
     投稿者：<%= recipe.user.name %>さん
-    <span id="favorite_buttons_<%= recipe.id %>"><%= render 'public/favorites/favorite', recipe: recipe %></span>
+    <span id="favorite_buttons_<%= recipe.id %>"><%= render 'public/favorites/favorite', recipe: recipe %></span><span> 👀<%= recipe.view_counts.count %></span>
   </p>
   <p>ジャンル：<%= recipe.genre.name %></p>
   <p>

@@ -12,14 +12,20 @@
             <% end %>
             <h6>
       <div class="card w-100">
-        <%= image_tag 'top_image.jpg',class: "card-img", size: "800x450" %>
+        <%= image_tag 'top_image.jpg',class: "card-img shadow-lg rounded", size: "800x450" %>
       </div>
       </div>
     <div class="col-12">
-      <p>新着レシピ</p>
+      <h5>新着レシピ</h5>
     </div>
     <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
       <%= render 'public/recipes/index', recipes: @new_recipes %>
+    </div>
+    <div class="col-12 mt-3">
+      <h5>注目レシピ</h5>
+    </div>
+    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
+      <%= render 'public/recipes/index', recipes: @noticed_recipes %>
     </div>
   </div>
 </div>

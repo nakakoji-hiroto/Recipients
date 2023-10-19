@@ -1,7 +1,7 @@
 <h2><%= recipe.title %></h2>
 <p>
   投稿者：<%= recipe.user.name %>さん
-  💖<span class="text-danger"><%= recipe.favorites.count %></span>
+  💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span>
 </p>
 <p>ジャンル：<%= recipe.genre.name %></p>
 <p>
@@ -23,6 +23,6 @@
 <div class= "catch_copy">
   <strong><%= recipe.catch_copy %></strong>
 </div>
-<div class="recipe_image mt-3">
+<div class="recipe_image mt-3 mb-3">
   <%= image_tag recipe.get_recipe_image(380, 250) %>
 </div>
