@@ -1,8 +1,10 @@
 <div class="container mx-auto">
   <h3><span class="page_title col-10 offset-1">調理手順一覧</span></h3>
-  <div class="recipe_top_information d-flex justify-content-around mt-4 p-1">
-    <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(300, 200) %></span></h4>
-    <table class="table table-sm w-25">
+  <div class="recipe_top_information d-flex justify-content-around flex-wrap mt-4 p-1">
+    <div class="d-flex  align-items-center">
+      <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(300, 200) %></span></h4>
+    </div>
+    <table class="table table-sm w-50">
       <thead>
         <tr>
           <th>材料名</th>

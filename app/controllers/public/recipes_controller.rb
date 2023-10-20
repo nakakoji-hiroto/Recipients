@@ -3,6 +3,7 @@ class Public::RecipesController < ApplicationController
   before_action :ensure_guest_user ,except: [:index, :show, :genre_search]
   def new
     @recipe = Recipe.new
+    @difficulty_choice = {易しい: "1", やや易しい: "2", 普通: "3", やや難しい: "4", 難しい: "5"}
   end
 
   def index
@@ -16,6 +17,7 @@ class Public::RecipesController < ApplicationController
     @new_recipes = Recipe.order('id DESC').limit(3)
     criteria = params[:criteria]
     display = params[:display]
+    
     case criteria
       when 'favorite'
         #すべての投稿レシピから「公開」状態のものを抽出 >> 各レシピにつけられたいいね数の多い順に並び替え
@@ -36,7 +38,13 @@ class Public::RecipesController < ApplicationController
         flash.now[:filter_result] = "閲覧数が多い順に#{display}件、表示しました。"
         @filtered = true
       when 'easy'
-        @filtered_recipes = @recipe.recipe_comments.order('id ASC')
+        #すべての投稿レシピから「公開」状態のものを抽出 >> 各レシピにつけられた難易度の易しい順に並び替え
+        #フォームから受け取った件数分のデータを抽出する。
+        filtered_recipes = Recipe.where(is_release: true).order('difficulty ASC').limit(display)
+        #Kaminariでページネーションして,viewページに渡す。
+        @recipes = Kaminari.paginate_array(filtered_recipes).page(params[:page])
+        flash.now[:filter_result] = "難易度が易しい順に#{display}件、表示しました。"
+        @filtered = true
       else
         @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
         @filtered = false
@@ -53,6 +61,20 @@ class Public::RecipesController < ApplicationController
       unless @recipe.user == current_user
         current_user.view_counts.create(recipe_id: @recipe.id)
       end
+    end
+    case @recipe.difficulty
+      when "1"
+        @recipe_difficulty = "易しい"
+      when "2"
+        @recipe_difficulty = "やや易しい"
+      when "3"
+        @recipe_difficulty = "普通"
+      when "4"
+        @recipe_difficulty = "やや難しい"
+      when "5"
+        @recipe_difficulty = "難しい"
+      else
+        @recipe_difficulty = "未設定"
     end
     @recipe_tags = @recipe.tags
   end
@@ -74,6 +96,7 @@ class Public::RecipesController < ApplicationController
   def edit
     @recipe = Recipe.find(params[:id])
     @tag_list = @recipe.tags.pluck(:name).join(',')
+    @difficulty_choice = {易しい: "1", やや易しい: "2", 普通: "3", やや難しい: "4", 難しい: "5"}
   end
   
   def update
@@ -129,6 +152,6 @@ class Public::RecipesController < ApplicationController
   private
   
   def recipe_params
-    params.require(:recipe).permit(:title, :catch_copy, :genre_id, :image)
+    params.require(:recipe).permit(:title, :catch_copy, :genre_id, :image, :difficulty)
   end
 end

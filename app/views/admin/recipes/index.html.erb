@@ -42,7 +42,22 @@
                 <strong><span class="text-danger ml-3">※非公開</span></strong>
               <% end %>
               <br>
-              <%= recipe.catch_copy %><br>
+              <% case recipe.difficulty %>
+                <% when "1" %>
+                  難易度：易しい
+                <% when "2" %>
+                  難易度：やや易しい
+                <% when "3" %>
+                  難易度：普通
+                <% when "4" %>
+                  難易度：やや難しい
+                <% when "5" %>
+                  難易度：難しい
+                <% else %>
+                  難易度：未設定
+              <% end %>
+              <br>
+              <strong><%= recipe.catch_copy %></strong><br>
               投稿者：<%= recipe.user.name %>さん
             </div>
           </div>

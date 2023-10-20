@@ -6,10 +6,10 @@
   <% end %>
   <div class="row">
     <% if @tag_search %>
-    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex">
+    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
       <% @tag_recipes.each do |recipe| %>
         <% if recipe.is_release %>
-          <div class="card recipe_card ml-3 p-3 d-flex">
+          <div class="card recipe_card mt-3 ml-3 p-3 d-flex">
             <div class="row">
               <div class="col-4">
                 <%= link_to recipe_path(recipe) do %>
@@ -18,8 +18,22 @@
               </div>
               <div class="col-8">
                 <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
+                <% case recipe.difficulty %>
+                  <% when "1" %>
+                    難易度：易しい
+                  <% when "2" %>
+                    難易度：やや易しい
+                  <% when "3" %>
+                    難易度：普通
+                  <% when "4" %>
+                    難易度：やや難しい
+                  <% when "5" %>
+                    難易度：難しい
+                  <% else %>
+                    難易度：未設定
+                <% end %>
                 💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span><br>
-                <%= recipe.catch_copy %><br>
+                <strong><%= recipe.catch_copy %></strong><br>
                 投稿者：<%= recipe.user.name %>さん
               </div>
             </div>

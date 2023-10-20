@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags %>
+    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags, recipe_difficulty: @recipe_difficulty %>
     <div class="col-5 offset-1">
       <% if @recipe.user == current_user %>
         <%= link_to 'このレシピを編集する', edit_recipe_path(@recipe), class: "btn btn-success border border-dark mr-3 mt-2" %>
@@ -13,7 +13,10 @@
         <%= link_to 'レビューする', new_recipe_recipe_comment_path(@recipe), class:"btn btn-success border border-dark mt-2 mr-3" %>
       <% end %>
       <%= link_to 'レシピを見る', recipe_recipe_steps_path(@recipe), class:"btn btn-secondary border border-dark mt-2 mr-3" %>
-      <%= link_to 'レビューを見る', recipe_recipe_comments_path(@recipe), class:"btn btn-light border border-dark mt-2" %>
+      <%= link_to 'レビューを見る', recipe_recipe_comments_path(@recipe), class:"btn btn-light border border-dark mt-2 mr-3" %>
+      <div class="d-flex justify-content-center">
+        <%= link_to 'レシピ一覧へ戻る', recipes_path, class:"btn btn-danger border border-dark mt-4 w-50" %>
+      </div>
     </div>
   </div>
 </div>

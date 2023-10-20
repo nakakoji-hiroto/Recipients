@@ -4,6 +4,7 @@
     投稿者：<%= recipe.user.name %>さん
     <span id="favorite_buttons_<%= recipe.id %>"><%= render 'public/favorites/favorite', recipe: recipe %></span><span> 👀<%= recipe.view_counts.count %></span>
   </p>
+  <p>難易度：<%= recipe_difficulty %></p>
   <p>ジャンル：<%= recipe.genre.name %></p>
   <p>
     タグ：
@@ -15,7 +16,7 @@
   <div class= "catch_copy">
     <strong><%= recipe.catch_copy %></strong>
   </div>
-  <div class="recipe_image mt-3">
+  <div class="recipe_image my-3">
     <%= image_tag recipe.get_recipe_image(380, 250) %>
   </div>
 </div>

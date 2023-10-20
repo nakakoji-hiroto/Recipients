@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags %>
+    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags, recipe_difficulty: @recipe_difficulty %>
     <div class="col-5 offset-1">
       <span><%= l @recipe_comment.created_at %>　<%= @recipe_comment.user.name %>さん</span>
       <table class="table table-borderless w-100">
