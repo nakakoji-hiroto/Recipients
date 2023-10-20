@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:new, :edit, :create, :update]
     get 'admin/genres/search' => 'recipes#genre_search', as: 'admin_genre_search'
     get 'admin/tags/search' => 'tags#tag_search', as: 'admin_tag_search'
+    get 'admin/words/search' => 'recipes#word_search', as: 'admin_word_search'
   end
 
   namespace :admin do
@@ -36,6 +37,7 @@ Rails.application.routes.draw do
     end
     get 'genres/search' => 'recipes#genre_search', as: 'genre_search'
     get 'tags/search' => 'tags#tag_search', as: 'tag_search'
+    get 'words/search' => 'recipes#word_search', as: 'word_search'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

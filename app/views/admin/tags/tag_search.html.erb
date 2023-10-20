@@ -16,7 +16,10 @@
               <% end %>
             </div>
             <div class="col-8">
-              <strong><%= link_to recipe.title, admin_recipe_path(recipe) %></strong><br>
+              <strong><%= link_to recipe.title, admin_recipe_path(recipe) %></strong>
+              <% unless recipe.is_release %>
+                <strong><span class="text-danger ml-3">※非公開</span></strong>
+              <% end %><br>
               💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span><br>
               <%= recipe.catch_copy %><br>
               投稿者：<%= recipe.user.name %>さん
@@ -27,5 +30,6 @@
     </div>
     <% end %>
     <%= link_to 'レシピ一覧に戻る', admin_recipes_path, class: "btn btn-danger border border-dark p-2 mt-3 offset-1" %>
+    <div class="d-flex justify-content-center"><%= paginate @tag_recipes %></div>
   </div>
 </div>

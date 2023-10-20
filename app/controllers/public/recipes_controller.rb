@@ -12,6 +12,7 @@ class Public::RecipesController < ApplicationController
     @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
     @criteria_choice = {いいねが多い順に: 'favorite', 閲覧数が多い順に: 'many_views', 難易度が易しい順に: 'easy'}
     @display_choice = {　5件: 5,　10件: 10,　30件: 30,　50件: 50,　100件: 100}
+    @word_search_criteria_choice = {レシピ名: 'title', キャッチコピー: 'catch_copy'}
     @new_recipes = Recipe.order('id DESC').limit(3)
     criteria = params[:criteria]
     display = params[:display]
@@ -100,10 +101,29 @@ class Public::RecipesController < ApplicationController
   end
   
   def genre_search
-    @genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id])
+    genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id])
     @genre = Genre.find(recipe_params[:genre_id])
     #非公開になっているレシピの件数をカウントする
-    @recipe_count = @genre_recipes.where(is_release: true).count
+    @recipe_count = genre_recipes.where(is_release: true).count
+    @genre_recipes = Kaminari.paginate_array(genre_recipes).page(params[:page]).per(10)
+  end
+  
+  def word_search
+    @word_search_criteria = params[:word_search_criteria]
+    @word = params[:word]
+    if @word_search_criteria == 'title'
+      word_search_recipes = Recipe.where("title LIKE?","%#{@word}%")
+      #非公開になっているレシピの件数をカウントする
+      @recipe_count = word_search_recipes.where(is_release: true).count
+      @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page]).per(10)
+    elsif @word_search_criteria == 'catch_copy'
+      word_search_recipes = Recipe.where("catch_copy LIKE?","%#{@word}%")
+      #非公開になっているレシピの件数をカウントする
+      @recipe_count = word_search_recipes.where(is_release: true).count
+      @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page]).per(10)
+    else
+      redirect_to recipes_path
+    end
   end
   
   private

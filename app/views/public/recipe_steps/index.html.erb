@@ -25,5 +25,6 @@
     </div>
   </div>
   <%= link_to 'レシピページへ戻る', recipe_path(@recipe), class: "btn btn-danger p-2 m-3 w-25" %>
+  <div class="d-flex justify-content-center"><%= paginate @recipe_steps %></div>
 </div>
 

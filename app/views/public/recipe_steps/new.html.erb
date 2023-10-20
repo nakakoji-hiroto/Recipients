@@ -26,4 +26,5 @@
       <%= render 'index', recipe_steps: @recipe_steps, delete_button: @delete_button %>
     </div>
   </div>
+  <div class="d-flex justify-content-center"><%= paginate @recipe_steps %></div>
 </div>

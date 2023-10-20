@@ -4,7 +4,8 @@ class Admin::TagsController < ApplicationController
   def tag_search
     @tag = Tag.find_by(name: params[:name])
     if @tag.present?
-      @tag_recipes = @tag.recipes
+      tag_recipes = @tag.recipes
+      @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page]).per(10)
       @tag_search = true
     elsif params[:name].blank?
       flash[:alert] = "※タグ名が入力されていません"

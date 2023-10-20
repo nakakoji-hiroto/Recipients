@@ -6,10 +6,11 @@ class Public::TagsController < ApplicationController
     @tag = Tag.find_by(name: params[:name])
     @private_recipe_count = 0
     if @tag.present?
-      @tag_recipes = @tag.recipes
+      tag_recipes = @tag.recipes
       @tag_search = true
     #非公開になっているレシピの件数をカウントする
-    @recipe_count = @tag_recipes.where(is_release: true).count
+    @recipe_count = tag_recipes.where(is_release: true).count
+    @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page]).per(10)
     #   @tag_recipes.each do |tag_recipe|
     #     unless tag_recipe.is_release
     #       @private_recipe_count += 1

@@ -5,13 +5,13 @@ class Public::RecipeStepsController < ApplicationController
   def new
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_step = RecipeStep.new
-    @recipe_steps = @recipe.recipe_steps.order('step ASC')
+    @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
     @delete_button = true
   end
 
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    @recipe_steps = @recipe.recipe_steps.order('step ASC')
+    @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC').per(10)
     @delete_button = false
   end
 
@@ -19,16 +19,19 @@ class Public::RecipeStepsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_step = RecipeStep.new(recipe_step_params)
     if @recipe.recipe_steps.find_by(step: @recipe_step.step)
-      flash.now[:notice] = "手順番号が重複しています。"
-      @recipe_steps = @recipe.recipe_steps.order('step ASC')
-      render 'new'
+      flash[:notice] = "手順番号が重複しています。"
+      redirect_to  new_recipe_recipe_step_path(@recipe)
+      # @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
+      # @delete_button = true
+      # render 'new'
       return
     end
     @recipe_step.recipe_id = @recipe.id
     if @recipe_step.save
       redirect_to new_recipe_recipe_step_path(@recipe)
     else
-      @recipe_steps = @recipe.recipe_steps.order('step ASC')
+      @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
+      @delete_button = true
       render 'new'
     end
   end
