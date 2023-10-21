@@ -9,7 +9,7 @@
       </div>
     <% end %>
   <div class="row">
-    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
+    <div class="col-sm-12 col-md-11 col-lg-10 mx-auto my-2 d-flex flex-wrap">
       <%= form_with model: @recipe, url: genre_search_path, method: :get do |f| %>
         <div class="form-group form-inline d-flex justify-content-between mt-1">
           <%= f.label :genre_id, 'ジャンル', class: "genre_label mr-3" %>
@@ -38,7 +38,7 @@
     <% if @filtered %>
       <%= link_to '条件をリセット', recipes_path, class:"btn btn-sm btn-danger border border-dark ml-2 mb-3" %>
     <% end %>
-    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
+    <div class="col-sm-12 col-md-11 col-lg-10 mx-auto my-2 d-flex flex-wrap">
       <%= render 'index', recipes: @recipes %>
     </div>
   </div>

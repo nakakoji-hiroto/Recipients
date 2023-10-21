@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags %>
-    <div class="col-5 offset-1">
+    <%= render 'public/recipes/show', recipe: @recipe, recipe_tags: @recipe_tags, recipe_difficulty: @recipe_difficulty %>
+    <div class="col-lg-5 col-md-10 col-sm-11">
       <%= render 'layouts/error', object: @recipe_comment %>
       <%= form_with model: @recipe_comment, url: recipe_recipe_comments_path(@recipe), method: :post do |f| %>
         <div class="form-group" id="star">
@@ -30,8 +30,8 @@
           <%= f.text_area :comment, class:"form-control w-100 border border-dark comment_area", autofocus: true, autocomplete: "comment", placeholder: "コメントを入力\n（200文字まで）" %>
         </div>
         <div class="actions d-flex justify-content-between w-100 mt-4">
-          <%= f.submit "レビューを投稿する", class:"btn btn-info border border-dark mt-3 px-2" %>
-          <%= link_to 'レシピへ戻る', recipe_path(@recipe), class: "btn btn-danger border border-dark mt-3 px-2" %>
+          <%= f.submit "レビューを投稿する", class:"btn btn-info border border-dark my-3 px-2" %>
+          <%= link_to 'レシピへ戻る', recipe_path(@recipe), class: "btn btn-danger border border-dark my-3 px-2" %>
         </div>
       <% end %>
     </div>
