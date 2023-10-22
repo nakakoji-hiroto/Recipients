@@ -28,7 +28,9 @@ Rails.application.routes.draw do
     devise_scope :user do
     post "users/guest_sign_in", to: "sessions#guest_sign_in"
     end
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update] do
+      resource :user_relationships, only: [:create, :destroy]
+    end
     resources :recipes do
       resources :recipe_materials, only: [:new, :index, :create, :destroy]
       resources :recipe_steps, only: [:new, :index, :create, :destroy]

@@ -11,15 +11,15 @@
         </ul>
   <% end %>
   <div class="row">
-    <div class="col-md-10 col-11 mt-3">
+    <div class="col-md-10 col-12 mt-3">
       <%= form_with model: @genre do |f| %>
         <div class="form-group form-inline d-flex">
           <%= f.label :name, 'ジャンル名', class: "mr-5" %>
           <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "ジャンル名を入力" %>
         </div>
-        <div class="actions d-flex justify-content-around w-100 mt-3">
-          <%= f.submit "変更を保存する", class:"btn btn-sm btn-primary border border-dark w-25 mt-3 px-2 py-2" %>
-          <%= link_to '戻る', new_genre_path, class: "btn btn-sm btn-danger border border-dark w-25 mt-3 px-5 py-2" %>
+        <div class="actions d-flex justify-content-around w-75 mt-3">
+          <%= f.submit "変更を保存する", class:"btn btn-sm btn-primary border border-dark mt-3 px-2 py-2" %>
+          <%= link_to '戻る', new_genre_path, class: "btn btn-sm btn-danger border border-dark mt-3 px-5 py-2" %>
         </div>
       <% end %>
     </div>

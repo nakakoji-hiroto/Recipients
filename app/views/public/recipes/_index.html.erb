@@ -2,12 +2,12 @@
   <% if recipe.is_release %>
     <div class="card recipe_card ml-3 p-3 mb-3 shadow-lg rounded-3 d-flex">
       <div class="row">
-        <div class="col-4">
+        <div class="col-sm-4 col-12">
           <%= link_to recipe_path(recipe) do %>
             <%= image_tag recipe.get_recipe_image(100, 100) %>
           <% end %>
         </div>
-        <div class="col-8">
+        <div class="col-sm-8 col-12">
           <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
           <% case recipe.difficulty %>
             <% when "1" %>

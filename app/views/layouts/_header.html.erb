@@ -1,6 +1,6 @@
 <div class="container-fluid header_group py-3">
   <div class="row">
-    <div class="col-md-6 col-11 d-flex flex-wrap justify-content-around py-1">
+    <div class="col-md-6 col-12 d-flex flex-wrap justify-content-around py-1">
         <span class="header_">
           <%= image_tag 'logo_left.png', size: '70x70' %>
           <%= link_to root_path do %>
@@ -9,13 +9,15 @@
           <%= image_tag 'logo_right.png', size: '70x70' %>
         </span>
         <% if user_signed_in? %>
-        <div class="welcome py-4">
-          <%= "ようこそ #{current_user.name} さん" %>
-        </div>
+          <div class="welcome py-4">
+            <%= "ようこそ #{current_user.name} さん" %>
+          </div>
+        <% elsif admin_signed_in? %>
+          <strong class="text-light text-center admin_sign_in bg-danger w-25 mt-4 p-1">管理者用</strong>
         <% end %>
     </div>
-    <div class="col-md-6 col-11 header-button-group d-flex flex-wrap justify-content-between py-4">
-      <%= link_to 'トップページ', root_path, class: 'btn btn-sm btn-light header_button' %>
+    <div class="col-md-6 col-12 header-button-group d-flex flex-wrap justify-content-around py-4">
+      <%#= link_to 'トップページ', root_path, class: 'btn btn-sm btn-light header_button' %>
       <% if user_signed_in? %>
         <% unless current_user.email == "guest@example.com" %>
           <%= link_to 'マイページ', user_path(current_user), class: 'btn btn-sm btn-primary header_button' %>
@@ -25,9 +27,8 @@
         <%= link_to 'ログアウト', destroy_user_session_path, class: 'btn btn-sm btn-danger header_button', method: :delete %>
       <% elsif admin_signed_in? %>
         <%= link_to '投稿一覧', admin_recipes_path, class: 'btn btn-sm btn-success header_button' %>
-        <%= link_to '会員一覧', admin_path, class: 'btn btn-sm btn-info header_button w-25' %>
+        <%= link_to '会員一覧', admin_path, class: 'btn btn-sm btn-info header_button' %>
         <%= link_to 'ログアウト', destroy_admin_session_path, class: 'btn btn-sm btn-dark header_button', method: :delete %>
-        <strong class="text-light bg-danger p-1">管理者用</strong>
       <% else %>
         <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-sm btn-success header_button' %>
         <%= link_to "ゲストログイン", users_guest_sign_in_path, class: "btn btn-secondary btn-sm header_button", method: :post %>

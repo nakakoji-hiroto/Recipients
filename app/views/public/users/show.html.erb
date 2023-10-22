@@ -29,13 +29,14 @@
               <div class="col-8">
                 <strong><%= link_to recipe.title, recipe_path(recipe) %></strong><br>
                 💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span><br>
-                <%= recipe.catch_copy %><br>
+                <strong><%= recipe.catch_copy %></strong><br>
                 投稿者：<%= recipe.user.name %>さん
               </div>
             </div>
           </div>
         <% end %>
       <% end %>
+      <div class="mx-auto"><%= paginate @user_recipes %></div>
     </div>
   </div>
 </div>

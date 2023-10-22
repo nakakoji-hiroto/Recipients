@@ -1,39 +1,37 @@
-<!--フォロー機能実装時の表示とボタン-->
-<!--<#% if user == current_user %>-->
-<!--  <table class="table table-borderless">-->
-<!--    <tr>-->
-<!--        <th class="text-danger"><strong>フォロー中</strong></th>-->
-<!--        <td>-->
-<!--          <%# if %>-->
-<!--            <%#= link_to '利用停止にする', admin_user_path(user), class: "btn btn-sm btn-danger border border-dark", method: :patch, remote: true %>-->
-<!--          <%# else %>-->
-<!--            <%#= link_to '有効会員にする', admin_user_path(user), class: "btn btn-sm btn-success border border-dark", method: :patch, remote: true %>-->
-<!--          <%# end %>-->
-<!--        </td>-->
-<!--    </tr>-->
-<!--  </table>-->
-<!--<%# end %>-->
-
+<%= flash[:user_relation] %>
 <table class="table table-borderless">
+  <% if user != current_user %>
+    <tr>
+    <% unless user.followed_by?(current_user) %>
+      <th></th>
+      <td><%= link_to 'フォローする', user_user_relationships_path(user, name: user.name), class:"btn btn-sm btn-success border border-dark w-50 mx-auto", method: :post %></td>
+    <% else %>
+      <th class="text-danger"><%= "フォロー中" %></th>
+      <td><%= link_to 'フォローを外す', user_user_relationships_path(user, name: user.name), class:"btn btn-sm btn-danger border border-dark w-50 mx-auto", method: :delete %></td>
+    <% end %>
+    </tr>
+  <% end %>
   <tr>
       <th>ユーザー名</th>
       <td><%= user.name %></td>
   </tr>
-  <tr>
-      <th>メールアドレス</th>
-      <td><%= user.email %></td>
-  </tr>
+  <% if user == current_user %>
+    <tr>
+        <th>メールアドレス</th>
+        <td><%= user.email %></td>
+    </tr>
+  <% end %>
   <tr>
       <th>投稿レシピ数</th>
       <td><%= user.recipes.where(is_release: true).count %></td>
   </tr>
   <tr>
       <th>フォロー数</th>
-      <td></td>
+      <td><%= user.followers.count %></td>
   </tr>
   <tr>
       <th>フォロワー数</th>
-      <td></td>
+      <td><%= user.followeds.count %></td>
   </tr>
 </table>
 
