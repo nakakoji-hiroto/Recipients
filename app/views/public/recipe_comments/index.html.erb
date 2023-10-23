@@ -1,6 +1,6 @@
 <div class="container pt-4">
   <div class="review_title d-flex flex-wrap">
-    <h3><span class="page_title col-10 ml-4"><strong><%= @recipe.title %></strong>　のレビュー</span><span>（全<%= @review_count %>件）</span></h3>
+    <h3><span class="page_title col-10 ml-4"><strong><%= @recipe.title %></strong>のレビュー</span><span>（全<%= @review_count %>件）</span></h3>
       <%= form_with url: recipe_recipe_comments_path(@recipe), method: :get do |f| %>
       <div class="form-group form-inline d-flex justify-content-between ml-3">
         <%= f.select :sort, @choices %>
@@ -13,9 +13,9 @@
     <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
       <% @recipe_comments.each do |recipe_comment| %>
         <% if recipe_comment.is_release %>
-          <div class="comment_card mr-3 mt-3">
+          <div class="comment_card mr-3 my-2">
             <%= link_to recipe_recipe_comment_path(@recipe, recipe_comment), class: "recipe_comment_link" do %>
-              <div class="card recipe_card p-3 d-flex w-100 text-dark">
+              <div class="card review_card p-3 d-flex w-100 h-100 text-dark">
                 <span><%= l recipe_comment.created_at %>　<%= recipe_comment.user.name %>さん</span>
                 <div id="star_<%= recipe_comment.id %>"></div>
                 <script>

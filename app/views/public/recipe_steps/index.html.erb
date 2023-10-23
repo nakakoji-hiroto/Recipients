@@ -4,29 +4,16 @@
     <div class="d-flex  align-items-center">
       <h4><span class="col-10 ml-4"><strong><%= @recipe.title %></strong>　　<%= image_tag @recipe.get_recipe_image(300, 200) %></span></h4>
     </div>
-    <table class="table table-sm w-50">
-      <thead>
-        <tr>
-          <th>材料名</th>
-          <th>分量（4人分）</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @recipe.recipe_materials.each do |recipe_material| %>
-        <tr>
-          <td><%= recipe_material.name %></td>
-          <td><%= recipe_material.quantity %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <div class="recipe_material_table w-50 mx-auto">
+      <%= render 'public/recipe_materials/index', recipe: @recipe %>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-10 col-12 mx-auto d-flex flex-wrap">
       <%= render 'index', recipe_steps: @recipe_steps, delete_button: @delete_button %>
     </div>
   </div>
-  <%= link_to 'レシピページへ戻る', recipe_path(@recipe), class: "btn btn-danger p-2 m-3 w-25" %>
+  <%= link_to 'レシピページへ戻る', recipe_path(@recipe), class: "btn btn-danger p-2 m-3 w-sm-25" %>
   <div class="d-flex justify-content-center"><%= paginate @recipe_steps %></div>
 </div>
 

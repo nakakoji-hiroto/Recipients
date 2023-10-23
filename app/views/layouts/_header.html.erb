@@ -31,6 +31,7 @@
         <%= link_to 'ログアウト', destroy_admin_session_path, class: 'btn btn-sm btn-dark header_button', method: :delete %>
       <% else %>
         <%= link_to 'ログイン', new_user_session_path, class: 'btn btn-sm btn-success header_button' %>
+        <%= link_to '新規登録', new_user_registration_path, class: 'btn btn-sm btn-light header_button' %>
         <%= link_to "ゲストログイン", users_guest_sign_in_path, class: "btn btn-secondary btn-sm header_button", method: :post %>
       <% end %>
     </div>

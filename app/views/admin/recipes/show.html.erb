@@ -6,6 +6,9 @@
       </span>
     </div>
     <div class="col-md-5 offset-md-1 col-12">
+      <div class="recipe_material_table w-75 mx-auto">
+        <%= render 'admin/recipe_materials/index', recipe: @recipe %>
+      </div>
       <span id="admin_recipe_status_<%= @recipe.id %>"><%= render 'admin/recipes/is_release_update', recipe: @recipe %></span>
       <%= link_to 'レシピを見る', admin_recipe_steps_path(@recipe), class:"btn btn-light border border-dark my-2 mr-2" %>
       <%= link_to 'レビューを見る', admin_recipe_recipe_comments_path(@recipe), class:"btn btn-info border border-dark my-2 mr-2" %>

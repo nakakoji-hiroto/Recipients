@@ -1,0 +1,16 @@
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th>材料名</th>
+      <th>分量（4人分）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% recipe.recipe_materials.each do |recipe_material| %>
+    <tr>
+      <td><%= recipe_material.name %></td>
+      <td><%= recipe_material.quantity %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

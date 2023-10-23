@@ -6,7 +6,7 @@
       <% else %>
         <h3><span class="page_title ml-4">会員情報</span></h3>
       <% end %>
-      <span id="user_status_<%= @user.id %>"><%= render 'public/users/show', user: @user %></span>
+      <span id="follow_user_<%= @user.id %>"><%= render 'public/users/show', user: @user %></span>
       <%= link_to '会員一覧へ戻る', users_path, class: "btn btn-secondary border border-dark" %>
       <% if @user == current_user %>
         <div class="my_page_button_group d-flex mt-3">

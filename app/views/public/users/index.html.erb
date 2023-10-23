@@ -1,9 +1,18 @@
 <div class="container pt-1">
   <div class="users_title_group d-flex flex-wrap">
     <h3><span class="page_title col-10 ml-4">会員一覧</span></h3>
-    <span><strong>　<%= flash[:user_relation] %></strong></span>
-    <!-- 絞り込み用のselect_field -->
+    <%= form_with url: users_path, method: :get do |f| %>
+      <div class="form-group form-inline d-flex justify-content-between ml-3">
+        <%= f.label 'ユーザーを並べ替え', class: "tag_label mr-3" %>
+        <%= f.select(:criteria, @criteria_choice, { include_blank: "絞り込み基準を選択" }, :required => true) %>
+        <%= f.submit "並べ替える", class:"btn btn-sm btn-success border border-dark ml-3 p-1" %>
+        <% if @filtered %>
+          <%= link_to '表示をリセット', users_path, class:"btn btn-sm btn-danger border border-dark ml-2" %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
+  <%= flash.now[:filter_result] %>
   <div class="row">
     <div class="col-12 mx-auto my-2 d-flex">
       <table class="table mt-2">
@@ -33,13 +42,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <% if user != current_user %>
-                    <% unless user.followed_by?(current_user) %>
-                      <%= link_to 'フォローする', user_user_relationships_path(user, name: user.name), class:"btn btn-sm btn-success border border-dark w-75 mx-auto", method: :post %>
-                    <% else %>
-                      <%= link_to 'フォローを外す', user_user_relationships_path(user, name: user.name), class:"btn btn-sm btn-danger border border-dark w-75 mx-auto", method: :delete %>
-                    <% end %>
-                  <% end %>
+                  <%= link_to '詳細へ', user_path(user), class:"btn btn-sm btn-info border border-dark mx-auto" %>
                 </td>
               </tr>
             <% end %>
