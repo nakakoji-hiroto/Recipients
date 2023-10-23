@@ -1,9 +1,9 @@
 <div class="container pt-4">
   <h3><span class="page_title col-10 ml-4">新規レシピ投稿</span></h3>
   <div class="row">
-    <div class="col-md-8 col-10 mx-auto my-5">
+    <div class="col-md-8 col-11 mx-auto my-5">
       <%= render 'layouts/error', object: @recipe %>
-      <%= render 'form', recipe: @recipe %>
+      <%= render 'form', recipe: @recipe, difficulty_choice: @difficulty_choice %>
     </div>
   </div>
 </div>

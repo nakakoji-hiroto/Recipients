@@ -1,16 +1,16 @@
 <%= form_with model: recipe do |f| %>
   <div class="form-group form-inline d-flex justify-content-between">
     <%= f.label :title, 'タイトル' %>
-    <%= f.text_field :title, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "title", placeholder: "レシピ名を入力" %>
+    <%= f.text_field :title, class:"form-control w-50 title_field border border-dark", autofocus: true, autocomplete: "title", placeholder: "レシピ名を入力" %>
   </div>
   <div class="form-group form-inline d-flex justify-content-between">
     <%= f.label :catch_copy, 'キャッチコピー' %>
-    <%= f.text_area :catch_copy, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "catch_copy", placeholder: "キャッチコピーを入力" %>
+    <%= f.text_area :catch_copy, class:"form-control w-50 catch_copy_area border border-dark", autofocus: true, autocomplete: "catch_copy", placeholder: "キャッチコピーを入力" %>
   </div>
   <div class="form-group form-inline d-flex justify-content-between">
     <%= f.label :difficulty, '調理難易度', class: "difficulty_label" %>
     <div class="form-control select_form w-50 border border-0 pl-0">
-      <%= f.select(:difficulty, @difficulty_choice, { include_blank: "調理難易度を選択" }, :required => true) %>
+      <%= f.select(:difficulty, difficulty_choice, { include_blank: "調理難易度を選択" }, :required => true) %>
     </div>
   </div>
   <div class="form-group form-inline d-flex justify-content-between">
@@ -22,12 +22,12 @@
   <% if f.object.new_record? %>
     <div class="form-group form-inline d-flex justify-content-between">
       <%= f.label :tag_name, 'タグ 　※「,」で区切ると複数設定可能' %>
-      <%= f.text_field :tag_name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "tag_name", placeholder: "例）定番,お手軽,お弁当" %>
+      <%= f.text_field :tag_name, class:"form-control w-50 tag_field border border-dark", autofocus: true, autocomplete: "tag_name", placeholder: "例）定番,お手軽,お弁当" %>
     </div>
   <% else %>
     <div class="form-group form-inline d-flex justify-content-between">
     <%= f.label :tag_name, 'タグ 　※「,」で区切ると複数設定可能' %>
-    <%= f.text_field :tag_name, class:"form-control w-50 border border-dark", value: tag_list, autofocus: true, autocomplete: "tag_name", placeholder: "例）定番,お手軽,お弁当" %>
+    <%= f.text_field :tag_name, class:"form-control w-50 tag_field border border-dark", value: tag_list, autofocus: true, autocomplete: "tag_name", placeholder: "例）定番,お手軽,お弁当" %>
     </div>
   <% end %>
   <div class="form-group form-inline d-flex justify-content-between">
@@ -40,10 +40,10 @@
     </div>
   <% else %>
     <div class="actions d-flex justify-content-around w-100 mt-4">
-      <%= f.submit "変更を保存する", class:"btn btn-sm btn-success border border-dark w-25 mt-3 px-3 py-2" %>
-      <%= link_to '戻る', recipe_path(recipe), class: "btn btn-sm btn-danger border border-dark w-25 mt-3 px-5 py-2" %>
+      <%= f.submit "変更を保存する", class:"btn btn-sm btn-success border border-dark mt-3 px-3 py-2" %>
+      <%= link_to '戻る', recipe_path(recipe), class: "btn btn-sm btn-danger border border-dark mt-3 px-5 py-2" %>
     </div>
   <% end %>
 <% end %>
-    
+
 

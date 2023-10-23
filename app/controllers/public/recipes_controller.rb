@@ -89,6 +89,7 @@ class Public::RecipesController < ApplicationController
       flash[:notice] = "新規レシピを投稿しました。"
       redirect_to recipe_path(@recipe)
     else
+      @difficulty_choice = {易しい: "1", やや易しい: "2", 普通: "3", やや難しい: "4", 難しい: "5"}
       render 'new'
     end
   end
@@ -112,6 +113,7 @@ class Public::RecipesController < ApplicationController
       redirect_to recipe_path(@recipe)
     else
       @tag_list = @recipe.tags.pluck(:name).join(',')
+      @difficulty_choice = {易しい: "1", やや易しい: "2", 普通: "3", やや難しい: "4", 難しい: "5"}
       render 'edit'
     end
   end

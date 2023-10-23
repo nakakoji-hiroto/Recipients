@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user
-  
+
   def index
     @criteria_choice = {投稿レシピが多い順に: 'many_recipes', フォロー数が多い順に: 'many_follows', フォロワー数が順に: 'many_followeds'}
     criteria = params[:criteria]
@@ -45,6 +45,7 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    #ログイン中のユーザー以外の情報編集ページを表示させようとした場合、マイページへ遷移させる
     identification_user(@user, user_path(current_user))
   end
 
