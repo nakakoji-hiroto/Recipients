@@ -3,7 +3,7 @@ class Admin::RecipesController < ApplicationController
   
   def index
     @recipe = Recipe.new
-    @recipes = Recipe.page(params[:page]).per(10)
+    @recipes = Recipe.page(params[:page])
     @word_search_criteria_choice = {レシピ名: 'title', キャッチコピー: 'catch_copy'}
   end
 
@@ -57,7 +57,7 @@ class Admin::RecipesController < ApplicationController
   def genre_search
     genre_recipes = Recipe.where(genre_id: params[:recipe][:genre_id])
     @genre = Genre.find(params[:recipe][:genre_id])
-    @genre_recipes = Kaminari.paginate_array(genre_recipes).page(params[:page]).per(10)
+    @genre_recipes = Kaminari.paginate_array(genre_recipes).page(params[:page])
   end
   
   def word_search
@@ -66,11 +66,11 @@ class Admin::RecipesController < ApplicationController
     if @word_search_criteria == 'title'
       word_search_recipes = Recipe.where("title LIKE?","%#{@word}%")
       @recipe_count = word_search_recipes.count
-      @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page]).per(10)
+      @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page])
     elsif @word_search_criteria == 'catch_copy'
       word_search_recipes = Recipe.where("catch_copy LIKE?","%#{@word}%")
       @recipe_count = word_search_recipes.count
-      @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page]).per(10)
+      @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page])
     else
       redirect_to recipes_path
     end

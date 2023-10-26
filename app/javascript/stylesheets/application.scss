@@ -31,12 +31,18 @@ main {
   color: #FFF;
 }
 
+.field_with_errors {
+  background-color: #FFCCCC;
+}
+
 .field_with_errors > input {
   min-width: 305px;
+  background-color: #FFCCCC;
 }
 
 .field_with_errors > textarea {
   min-width: 305px;
+  background-color: #FFCCCC;
 }
 
 .explanation_area, .comment_area{
@@ -73,3 +79,8 @@ main {
 .title_field, .catch_copy_area, .tag_field {
   min-width: 325px;
 }
+
+.password_label {
+  width: 112px;
+}
+

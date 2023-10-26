@@ -11,7 +11,7 @@ class Recipe < ApplicationRecord
   has_many :view_counts, dependent: :destroy
   
   validates :title, presence: true, length: { in: 2..20 }
-  validates :catch_copy, presence: true, length: {maximum: 200 }
+  validates :catch_copy, presence: true, length: {maximum: 50 }
   
   def get_recipe_image(width, height)
     unless image.attached?

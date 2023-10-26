@@ -20,7 +20,7 @@
       <%= form_with model: @tag, url: tag_search_path, method: :get do |f| %>
         <div class="form-group form-inline d-flex justify-content-between">
           <%= f.label :name, 'タグ', class: "tag_label ml-5" %>
-          <%= f.text_field :name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "タグ名を入力" %>
+          <%= f.text_field(:name, class:"form-control w-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "タグ名を入力", :required => true) %>
           <%= f.submit "検索する", class:"btn btn-sm btn-secondary border border-dark p-1" %>
           <sapn class="text-light bg-danger offset-3"><%= flash[:alert] %></sapn>
         </div>

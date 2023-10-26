@@ -8,15 +8,15 @@ class Admin::RecipeCommentsController < ApplicationController
     sort = params[:sort]
     case sort
       when 'high_rating'
-        @recipe_comments = @recipe.recipe_comments.order('score DESC')
+        @recipe_comments = @recipe.recipe_comments.order('score DESC').page(params[:page]).per(9)
       when 'new'
-        @recipe_comments = @recipe.recipe_comments.order('id DESC')
+        @recipe_comments = @recipe.recipe_comments.order('id DESC').page(params[:page]).per(9)
         @choices = {日付の新しい順に: 'new', 日付の古い順に: 'old', 評価の高い順に: 'high_rating'}
       when 'old'
-        @recipe_comments = @recipe.recipe_comments.order('id ASC')
+        @recipe_comments = @recipe.recipe_comments.order('id ASC').page(params[:page]).per(9)
         @choices = {日付の古い順に: 'old',  評価の高い順に: 'high_rating', 日付の新しい順に: 'new'} 
       else
-        @recipe_comments = @recipe.recipe_comments
+        @recipe_comments = @recipe.recipe_comments.page(params[:page]).per(9)
     end
   end
 

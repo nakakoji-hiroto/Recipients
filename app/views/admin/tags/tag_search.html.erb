@@ -6,7 +6,7 @@
   <% end %>
   <div class="row">
     <% if @tag_search %>
-    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
+    <div class="col-12 mx-auto my-2 d-flex flex-wrap">
       <% @tag_recipes.each do |recipe| %>
         <div class="card recipe_card ml-3 mt-3 p-3 d-flex">
           <div class="row">
@@ -46,6 +46,8 @@
     </div>
     <% end %>
     <%= link_to 'レシピ一覧に戻る', admin_recipes_path, class: "btn btn-danger border border-dark p-2 my-3 offset-1" %>
-    <div class="d-flex justify-content-center"><%= paginate @tag_recipes %></div>
+    <% if @tag_search %>
+      <div class="d-flex justify-content-center col-12"><%= paginate @tag_recipes %></div>
+    <% end %>
   </div>
 </div>

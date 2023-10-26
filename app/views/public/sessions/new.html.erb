@@ -1,8 +1,7 @@
 <div class="container pt-4">
   <h4><span class="page_title col-10 ml-4">ログイン</span></h4>
   <div class="row">
-    <div class="col-md-8 col-10 mx-auto my-5">
-
+    <div class="col-md-8 col-sm-10 col-12 mx-auto my-5">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group form-inline d-flex justify-content-between">
           <%= f.label :email, 'メールアドレス' %><br />
@@ -18,7 +17,6 @@
           <%= f.submit "ログイン", class:"btn btn-info border border-dark w-50 mt-3 px-5 py-2" %>
         </div>
       <% end %>
-
     </div>
   </div>
   <h5 class="mt-5"><span class="page_title col ml-5">会員登録がお済みでない方</span></h5>

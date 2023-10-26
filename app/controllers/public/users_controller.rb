@@ -3,34 +3,34 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user
 
   def index
-    @criteria_choice = {投稿レシピが多い順に: 'many_recipes', フォロー数が多い順に: 'many_follows', フォロワー数が順に: 'many_followeds'}
+    @criteria_choice = {投稿レシピが多い順に: 'many_recipes', フォロー数が多い順に: 'many_follows', フォロワー数が多い順に: 'many_followeds'}
     criteria = params[:criteria]
     case criteria
       when 'many_recipes'
         #すべてのユーザーから「有効会員」のみ抽出 >> 各ユーザーが投稿したレシピ数の多い順に並び替え
-        filtered_users = User.where(is_active: true).includes(:recipes).sort_by { |user| -user.recipes.count }
+        filtered_users = User.where(is_active: true).where.not(email: "guest@example.com").includes(:recipes).sort_by { |user| -user.recipes.count }
         #Kaminariでページネーションして,viewページに渡す。
-        @users = Kaminari.paginate_array(filtered_users).page(params[:page]).per(10)
+        @users = Kaminari.paginate_array(filtered_users).page(params[:page])
         flash.now[:filter_result] = "投稿レシピが多い順に表示しました。"
         @filtered = true
       when 'many_follows'
         #すべてのユーザーから「有効会員」のみ抽出 >> フォロー数が多い順に並び替え
-        filtered_users = User.where(is_active: true).includes(:followers).sort_by { |user| -user.followers.count }
+        filtered_users = User.where(is_active: true).where.not(email: "guest@example.com").includes(:followers).sort_by { |user| -user.followers.count }
         #Kaminariでページネーションして,viewページに渡す。
-        @users = Kaminari.paginate_array(filtered_users).page(params[:page]).per(10)
+        @users = Kaminari.paginate_array(filtered_users).page(params[:page])
         flash.now[:filter_result] = "フォロー数が多い順に表示しました。"
         @filtered = true
       when 'many_followeds'
         #すべてのユーザーから「有効会員」のみ抽出 >> フォロワー数が多い順に並び替え
-        filtered_users = User.where(is_active: true).includes(:followeds).sort_by { |user| -user.followeds.count }
+        filtered_users = User.where(is_active: true).where.not(email: "guest@example.com").includes(:followeds).sort_by { |user| -user.followeds.count }
         #Kaminariでページネーションして,viewページに渡す。
-        @users = Kaminari.paginate_array(filtered_users).page(params[:page]).per(10)
+        @users = Kaminari.paginate_array(filtered_users).page(params[:page])
         flash.now[:filter_result] = "フォロワー数が多い順に表示しました。"
         @filtered = true
       else
-        indicate_users = User.where(is_active: true)
+        indicate_users = User.where(is_active: true).where.not(email: "guest@example.com")
         # ステータスが有効会員のユーザーのみページネーションして表示する
-        @users = Kaminari.paginate_array(indicate_users).page(params[:page]).per(10)
+        @users = Kaminari.paginate_array(indicate_users).page(params[:page])
         @filtered = false
     end
   end
@@ -45,7 +45,7 @@ class Public::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    #ログイン中のユーザー以外の情報編集ページを表示させようとした場合、マイページへ遷移させる
+    #ログイン中のユーザー以外のユーザー情報編集ページを表示させようとした場合、マイページへ遷移させる
     identification_user(@user, user_path(current_user))
   end
 

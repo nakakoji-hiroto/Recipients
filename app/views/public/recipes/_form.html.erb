@@ -35,13 +35,14 @@
     <%= f.file_field :image, accept: "image/*", class: "w-50" %>
   </div>
   <% if f.object.new_record? %>
-    <div class="actions d-flex justify-content-center w-100 mt-4">
-      <%= f.submit "投稿する", class:"btn btn-primary border border-dark w-50 mt-3 px-5 py-2" %>
+    <div class="actions d-flex justify-content-around w-100 mt-4">
+      <%= f.submit "投稿する", class:"btn btn-primary border border-dark mt-3 px-5 py-2" %>
+      <%= link_to '戻る', user_path(current_user), class: "btn btn-sm btn-danger border border-dark mt-3 px-5 py-2", data: { confirm: "入力済の内容は破棄されます。\nよろしいですか？" } %>
     </div>
   <% else %>
     <div class="actions d-flex justify-content-around w-100 mt-4">
       <%= f.submit "変更を保存する", class:"btn btn-sm btn-success border border-dark mt-3 px-3 py-2" %>
-      <%= link_to '戻る', recipe_path(recipe), class: "btn btn-sm btn-danger border border-dark mt-3 px-5 py-2" %>
+      <%= link_to '戻る', recipe_path(recipe), class: "btn btn-sm btn-danger border border-dark mt-3 px-5 py-2", data: { confirm: "入力済の変更は反映されません。\nよろしいですか？" } %>
     </div>
   <% end %>
 <% end %>

@@ -6,7 +6,7 @@
       <%= form_with model: @recipe_step, url: recipe_recipe_steps_path, method: :post do |f| %>
         <div class="form-group form-inline d-flex">
           <%= f.label :step, '手順番号', class: "mr-5" %>
-          <%= f.select :step, 1..20, prompt: "手順番号選択", class: "form-control d-inline-block w-auto"%>
+          <%= f.select(:step, 1..20, { include_blank: "手順番号選択" }, class: "form-control d-inline-block w-auto", :required => true) %>
         </div>
         <div class="form-group form-inline d-flex">
           <%= f.label :explanation, '作業内容', class: "mr-5" %>
@@ -17,8 +17,8 @@
           <%= f.file_field :image, accept: "image/*", class: "w-75" %>
         </div>
         <div class="actions d-flex justify-content-around w-100 mt-3">
-          <%= f.submit "手順を追加する", class:"btn btn-sm btn-success border border-dark w-25 mt-3 mb-3 px-2 py-2" %>
-          <%= link_to '戻る', recipe_path(@recipe), class: "btn btn-sm btn-danger border border-dark w-25 mt-3 mb-3 px-5 py-2" %>
+          <%= f.submit "手順を追加する", class:"btn btn-sm btn-success border border-dark mt-3 mb-3 px-3 py-2" %>
+          <%= link_to '戻る', recipe_path(@recipe), class: "btn btn-sm btn-danger border border-dark mt-3 mb-3 px-5 py-2" %>
         </div>
       <% end %>
     </div>

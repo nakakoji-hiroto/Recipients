@@ -2,11 +2,11 @@
   <% if @tag_search %>
     <h3><span class="page_title col-10 ml-4">「<%= @tag.name %>」のタグが付いたレシピ　<%= @recipe_count %> 件</span></h3>
   <% else %>
-    <h3><span class="page_title col-10 ml-4">「<%= @tag %>」のタグが付いたレシピ　<%= @tag_recipes %> 件</span></h3>
+    <h3><span class="page_title col-10 ml-4">「<%= @tag %>」のタグが付いたレシピ　<%= @recipe_count %> 件</span></h3>
   <% end %>
   <div class="row">
     <% if @tag_search %>
-    <div class="col-sm-12 col-md-11 col-10 mx-auto my-2 d-flex flex-wrap">
+    <div class="col-12 mx-auto my-2 d-flex flex-wrap">
       <% @tag_recipes.each do |recipe| %>
         <% if recipe.is_release %>
           <div class="card recipe_card mt-3 ml-3 p-3 d-flex">
@@ -42,7 +42,9 @@
       <% end %>
     </div>
     <% end %>
-    <%= link_to 'レシピ一覧に戻る', recipes_path, class: "btn btn-danger border border-dark p-2 mt-3 offset-1" %>
-    <div class="d-flex justify-content-center"><%= paginate @tag_recipes %></div>
+    <%= link_to 'レシピ一覧に戻る', recipes_path, class: "btn btn-danger border border-dark p-2 my-3 offset-1" %>
+    <% if @tag_search %>
+      <div class="d-flex justify-content-center col-12"><%= paginate @tag_recipes %></div>
+    <% end %>
   </div>
 </div>

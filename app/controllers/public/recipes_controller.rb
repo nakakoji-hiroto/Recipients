@@ -122,11 +122,11 @@ class Public::RecipesController < ApplicationController
     recipe = Recipe.find(params[:id])
     recipe.destroy
     flash[:notice] = "レシピを削除しました。"
-    redirect_to recipes_path
+    redirect_to user_path(current_user)
   end
   
   def genre_search
-    genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id])
+    genre_recipes = Recipe.where(genre_id: recipe_params[:genre_id]).where(is_release: true)
     @genre = Genre.find(recipe_params[:genre_id])
     #非公開になっているレシピの件数をカウントする
     @recipe_count = genre_recipes.where(is_release: true).count
@@ -137,12 +137,12 @@ class Public::RecipesController < ApplicationController
     @word_search_criteria = params[:word_search_criteria]
     @word = params[:word]
     if @word_search_criteria == 'title'
-      word_search_recipes = Recipe.where("title LIKE?","%#{@word}%")
+      word_search_recipes = Recipe.where("title LIKE?","%#{@word}%").where(is_release: true)
       #非公開になっているレシピの件数をカウントする
       @recipe_count = word_search_recipes.where(is_release: true).count
       @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page]).per(10)
     elsif @word_search_criteria == 'catch_copy'
-      word_search_recipes = Recipe.where("catch_copy LIKE?","%#{@word}%")
+      word_search_recipes = Recipe.where("catch_copy LIKE?","%#{@word}%").where(is_release: true)
       #非公開になっているレシピの件数をカウントする
       @recipe_count = word_search_recipes.where(is_release: true).count
       @word_search_recipes = Kaminari.paginate_array(word_search_recipes).page(params[:page]).per(10)

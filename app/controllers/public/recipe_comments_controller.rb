@@ -45,31 +45,36 @@ class Public::RecipeCommentsController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     unless @recipe.is_release
       redirect_to recipes_path
+      return
     end
-    @recipe_comment = RecipeComment.new
-    @recipe_comments = @recipe.recipe_comments
-    @private_recipe_comment_count = 0
+    recipe_comments = @recipe.recipe_comments
+    #レシピにつけられたレビュー全件より、公開中のレシピのみ抽出する
+    indicate_recipe_comments = recipe_comments.where(is_release: true)
+    #公開中のレビューの総件数を数える
+    @review_count = indicate_recipe_comments.count
     @choices = {評価の高い順に: 'high_rating', 日付の新しい順に: 'new', 日付の古い順に: 'old'}
     sort = params[:sort]
-    #非公開になっているレビューの件数をカウントする
-    @recipe_comments.each do |recipe_comment|
-      unless recipe_comment.is_release
-        @private_recipe_comment_count += 1
-      end
-    end
-    @review_count = @recipe_comments.count - @private_recipe_comment_count
     
     case sort
       when 'high_rating'
-        @recipe_comments = @recipe.recipe_comments.order('score DESC')
+        #公開中のレビューをスコアの高い順に並べ替える
+        recipe_comments = @recipe.recipe_comments.where(is_release: true).order('score DESC')
+        #Kaminariでページネーションして,viewページに渡す。
+        @recipe_comments = Kaminari.paginate_array(recipe_comments).page(params[:page]).per(9)
       when 'new'
-        @recipe_comments = @recipe.recipe_comments.order('id DESC')
+        #公開中のレビューを投稿日付の新しい順に並べ替える
+        recipe_comments = @recipe.recipe_comments.where(is_release: true).order('id DESC')
+        #Kaminariでページネーションして,viewページに渡す。
+        @recipe_comments = Kaminari.paginate_array(recipe_comments).page(params[:page]).per(9)
         @choices = {日付の新しい順に: 'new', 日付の古い順に: 'old', 評価の高い順に: 'high_rating'}
       when 'old'
-        @recipe_comments = @recipe.recipe_comments.order('id ASC')
+        #公開中のレビューを投稿日付の古い順に並べ替える
+        recipe_comments = @recipe.recipe_comments.where(is_release: true).order('id ASC')
+        #Kaminariでページネーションして,viewページに渡す。
+        @recipe_comments = Kaminari.paginate_array(recipe_comments).page(params[:page]).per(9)
         @choices = {日付の古い順に: 'old',  評価の高い順に: 'high_rating', 日付の新しい順に: 'new'} 
       else
-        @recipe_comments = @recipe.recipe_comments
+        @recipe_comments = Kaminari.paginate_array(indicate_recipe_comments).page(params[:page]).per(9)
     end
   end
 

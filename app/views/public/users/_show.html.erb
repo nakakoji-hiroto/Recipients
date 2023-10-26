@@ -4,10 +4,10 @@
     <tr>
     <% unless user.followed_by?(current_user) %>
       <th></th>
-      <td><%= link_to 'フォローする', user_user_relationships_path(user), class:"btn btn-sm btn-success border border-dark w-50 mx-auto", method: :post, remote: true %></td>
+      <td><%= link_to 'フォローする', user_user_relationships_path(user), class:"btn btn-sm btn-success border border-dark mx-auto", method: :post, remote: true %></td>
     <% else %>
       <th class="text-danger"><%= "フォロー中" %></th>
-      <td><%= link_to 'フォローを外す', user_user_relationships_path(user), class:"btn btn-sm btn-danger border border-dark w-50 mx-auto", method: :delete, remote: true %></td>
+      <td><%= link_to 'フォローを外す', user_user_relationships_path(user), class:"btn btn-sm btn-danger border border-dark mx-auto", method: :delete, remote: true %></td>
     <% end %>
     </tr>
   <% end %>

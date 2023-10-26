@@ -2,15 +2,15 @@
   <div class="row d-flex justify-content-center">
   <h2>レシピエントへようこそ！</h2><br>
     <div class="top_introduction col-11 mt-2">
-            <h6>
-            本サイトは、料理好きの皆さんの為のレシピ紹介サイトです。<br><br>
-            ユーザーはサイト内のレシピに自由にコメントやレビューができます。<br><br>
-            また、お気に入りのレシピにはいいねをすることができ、人気のレシピを簡単に探せます。<br><br>
-            <% unless user_signed_in? %>
-              サイト内の機能のご利用にはユーザー登録が必要です。 ※新規登録は <%= link_to 'こちら', new_user_registration_path %><br><br>
-              まずは、お気軽にゲストログインにてサイト内の機能をお試しください。 ※ゲストログインは<%= link_to 'こちら', users_guest_sign_in_path, method: :post %>
-            <% end %>
-            <h6>
+      <h6>
+      本サイトは、料理好きの皆さんの為のレシピ紹介サイトです。<br><br>
+      登録ユーザーはサイト内のレシピに自由にコメントやレビューをすることができます。<br><br>
+      また、お気に入りのレシピにはいいねをすることができ、人気のレシピが簡単に探せます。<br><br>
+      <% unless user_signed_in? %>
+        サイト内の機能のご利用にはユーザー登録が必要です。 ※新規登録は <%= link_to 'こちら', new_user_registration_path %><br><br>
+        まずは、お気軽にゲストログインにてサイト内の機能をお試しください。 ※ゲストログインは<%= link_to 'こちら', users_guest_sign_in_path, method: :post %>
+      <% end %>
+      <h6>
       <div class="card w-100">
         <%= image_tag 'top_image.jpg',class: "card-img img-fluid shadow-lg rounded", size: "800x450" %>
       </div>
