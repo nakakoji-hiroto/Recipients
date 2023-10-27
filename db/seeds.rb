@@ -84,6 +84,11 @@ User.find_or_create_by!(email: "user15@sample") do |user|
   user.password = "user15_pass"
 end
 
+Genre.create!(name: '和食')
+Genre.create!(name: '洋食')
+Genre.create!(name: '中華')
+Genre.create!(name: 'その他')
+
 Recipe.find_or_create_by!(title: "カレーライス") do |recipe|
   recipe.user_id = 1
   recipe.genre_id = 4
