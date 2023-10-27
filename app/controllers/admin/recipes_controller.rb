@@ -58,6 +58,7 @@ class Admin::RecipesController < ApplicationController
     genre_recipes = Recipe.where(genre_id: params[:recipe][:genre_id])
     @genre = Genre.find(params[:recipe][:genre_id])
     @genre_recipes = Kaminari.paginate_array(genre_recipes).page(params[:page])
+    @genre_recipes_count = genre_recipes.count
   end
   
   def word_search

@@ -6,6 +6,7 @@ class Admin::TagsController < ApplicationController
     if @tag.present?
       tag_recipes = @tag.recipes
       @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page]).per(10)
+      @tag_recipes_count = tag_recipes.count
       @tag_search = true
     elsif params[:name].blank?
       flash[:alert] = "※タグ名が入力されていません"

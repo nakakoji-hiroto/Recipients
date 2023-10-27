@@ -1,6 +1,6 @@
 <div class="container pt-4">
   <% if @tag_search %>
-    <h3><span class="page_title col-10 ml-4">「<%= @tag.name %>」のタグが付いたレシピ　<%= @tag_recipes.count %> 件</span></h3>
+    <h3><span class="page_title col-10 ml-4">「<%= @tag.name %>」のタグが付いたレシピ　<%= @tag_recipes_count %> 件</span></h3>
   <% else %>
     <h3><span class="page_title col-10 ml-4">「<%= @tag %>」のタグが付いたレシピ　<%= @tag_recipes %> 件</span></h3>
   <% end %>
