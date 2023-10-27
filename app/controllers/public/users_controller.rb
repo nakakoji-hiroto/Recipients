@@ -41,6 +41,11 @@ class Public::UsersController < ApplicationController
     if @user.email == "guest@example.com"
       redirect_to user_path(current_user)
     end
+    # 非公開ユーザーの詳細ページは表示させず、ユーザー一覧ページへ遷移する
+    unless @user.is_active
+      redirect_to user_path(current_user)
+    end
+    
     user_recipes = @user.recipes
     indicate_recipes = user_recipes.where(is_release: true)
     # 公開中のレシピのみページネーションして表示する
