@@ -9,23 +9,22 @@ class Recipe < ApplicationRecord
   has_many :tags,through: :recipe_tags
   has_many :recipe_comments, dependent: :destroy
   has_many :view_counts, dependent: :destroy
-  
+
   validates :title, presence: true, length: { in: 2..20 }
   validates :catch_copy, presence: true, length: {maximum: 50 }
-  
+
   def get_recipe_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.png')
       image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
     image.variant( resize: "#{width}x#{height}^", gravity: "center", crop: "#{width}x#{height}+0+0" )
-    #image.variant(resize_to_limit: [width, height]).processed
   end
-  
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
-  
+
   def save_tag(sent_tags)
     # タグが存在していれば、タグの名前を配列として全て取得
     current_tags = self.tags.pluck(:name) unless self.tags.nil?
@@ -45,5 +44,5 @@ class Recipe < ApplicationRecord
       self.tags << new_recipe_tag
     end
   end
-  
+
 end

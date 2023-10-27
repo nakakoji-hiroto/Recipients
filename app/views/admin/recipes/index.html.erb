@@ -36,11 +36,11 @@
               <% end %>
             </div>
             <div class="col-8 offset-1">
+              <% unless recipe.is_release %>
+                <strong><span class="text-danger ml-3">※非公開</span></strong><br>
+              <% end %>
               <strong><%= link_to recipe.title, admin_recipe_path(recipe) %></strong>
               💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span>
-              <% unless recipe.is_release %>
-                <strong><span class="text-danger ml-3">※非公開</span></strong>
-              <% end %>
               <br>
               <% case recipe.difficulty %>
                 <% when "1" %>

@@ -9,39 +9,79 @@ Admin.find_or_create_by!(email: 'admin@recipe.com') do |admin|
   admin.password = 'admin_pass'
 end
 
-User.find_or_create_by!(email: "user7@sample.com") do |user|
-  user.name = "test_user7"
+User.find_or_create_by!(email: "user1@sample") do |user|
+  user.name = "パンダ"
+  user.password = "user1_pass"
+end
+
+User.find_or_create_by!(email: "user2@sample") do |user|
+  user.name = "ライオン"
+  user.password = "user2_pass"
+end
+
+User.find_or_create_by!(email: "user3@sample") do |user|
+  user.name = "キリン"
+  user.password = "user3_pass"
+end
+
+User.find_or_create_by!(email: "user4@sample") do |user|
+  user.name = "カピバラ"
+  user.password = "user4_pass"
+end
+
+User.find_or_create_by!(email: "user5@sample") do |user|
+  user.name = "タスマニアデビル"
+  user.password = "user5_pass"
+end
+
+User.find_or_create_by!(email: "user6@sample") do |user|
+  user.name = "シマウマ"
+  user.password = "user6_pass"
+end
+
+User.find_or_create_by!(email: "user7@sample") do |user|
+  user.name = "カバ"
   user.password = "user7_pass"
 end
 
-User.find_or_create_by!(email: "user8@sample.com") do |user|
-  user.name = "test_user8"
+User.find_or_create_by!(email: "user8@sample") do |user|
+  user.name = "ウサギ"
   user.password = "user8_pass"
 end
 
-User.find_or_create_by!(email: "user9@sample.com") do |user|
-  user.name = "test_user9"
+User.find_or_create_by!(email: "user9@sample") do |user|
+  user.name = "ネコ"
   user.password = "user9_pass"
 end
 
-User.find_or_create_by!(email: "user10@sample.com") do |user|
-  user.name = "test_user10"
+User.find_or_create_by!(email: "user10@sample") do |user|
+  user.name = "プレーリードッグ"
   user.password = "user10_pass"
 end
 
-User.find_or_create_by!(email: "user11@sample.com") do |user|
-  user.name = "test_user11"
+User.find_or_create_by!(email: "user11@sample") do |user|
+  user.name = "スローロリス"
   user.password = "user11_pass"
 end
 
-User.find_or_create_by!(email: "user12@sample.com") do |user|
-  user.name = "test_user12"
+User.find_or_create_by!(email: "user12@sample") do |user|
+  user.name = "トラ"
   user.password = "user12_pass"
 end
 
-User.find_or_create_by!(email: "user13@sample.com") do |user|
-  user.name = "test_user13"
+User.find_or_create_by!(email: "user13@sample") do |user|
+  user.name = "コンドル"
   user.password = "user13_pass"
+end
+
+User.find_or_create_by!(email: "user14@sample") do |user|
+  user.name = "ヒツジ"
+  user.password = "user14_pass"
+end
+
+User.find_or_create_by!(email: "user15@sample") do |user|
+  user.name = "オオカミ"
+  user.password = "user15_pass"
 end
 
 Recipe.find_or_create_by!(title: "カレーライス") do |recipe|
@@ -194,6 +234,22 @@ Recipe.find_or_create_by!(title: "肉汁あふれる小籠包") do |recipe|
   recipe.catch_copy = "滴る肉汁がたまらない逸品です"
   recipe.difficulty = "2"
   recipe.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/小籠包.jpg"), filename:"小籠包.jpg")
+end
+
+Recipe.find_or_create_by!(title: "ハムチーズサンド") do |recipe|
+  recipe.user_id = 3
+  recipe.genre_id = 2
+  recipe.catch_copy = "軽食の定番サンドウィッチ"
+  recipe.difficulty = "1"
+  recipe.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/ハムチーズサンド.jpg"), filename:"ハムチーズサンド.jpg")
+end
+
+Recipe.find_or_create_by!(title: "カツサンド") do |recipe|
+  recipe.user_id = 3
+  recipe.genre_id = 2
+  recipe.catch_copy = "ボリューム満点のカツサンド"
+  recipe.difficulty = "3"
+  recipe.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/カツサンド.jpg"), filename:"カツサンド.jpg")
 end
 
 RecipeMaterial.find_or_create_by!(name: "じゃがいも") do |recipe_material|

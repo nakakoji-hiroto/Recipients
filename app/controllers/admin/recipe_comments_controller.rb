@@ -42,7 +42,6 @@ class Admin::RecipeCommentsController < ApplicationController
   
   def update
     @recipe = Recipe.find(params[:recipe_id])
-    #@recipe_tags = @recipe.tags
     @recipe_comment = @recipe.recipe_comments.find(params[:id])
     case @recipe.difficulty
       when "1"

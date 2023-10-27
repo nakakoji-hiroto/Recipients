@@ -37,6 +37,10 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    # ゲストユーザーの詳細ページは表示させず、マイページへ遷移する
+    if @user.email == "guest@example.com"
+      redirect_to user_path(current_user)
+    end
     user_recipes = @user.recipes
     indicate_recipes = user_recipes.where(is_release: true)
     # 公開中のレシピのみページネーションして表示する

@@ -4,6 +4,9 @@ class Public::RecipeMaterialsController < ApplicationController
   
   def new
     @recipe = Recipe.find(params[:recipe_id])
+    recipe_user = @recipe.user
+    #レシピの投稿者以外のユーザーが材料登録ページを表示させようとした場合、レシピ詳細ページへ遷移させる
+    identification_user(recipe_user, recipe_path(@recipe))
     @recipe_material = RecipeMaterial.new
     @recipe_materials = RecipeMaterial.all
     @recipe_genre = @recipe.genre.name

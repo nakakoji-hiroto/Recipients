@@ -5,7 +5,7 @@
     <h3><span class="page_title col-10 ml-4">キャッチコピーに「<%= @word %>」を含むレシピの検索結果　<%= @recipe_count %> 件</span></h3>
   <% end %>
   <div class="row">
-    <div class="col-12 mx-auto my-2 d-flex justify-content-center flex-wrap">
+    <div class="col-12 mx-auto my-2 d-flex flex-wrap">
       <% @word_search_recipes.each do |recipe| %>
         <% if recipe.is_release %>
           <div class="card recipe_card mt-3 ml-3 p-3 d-flex">

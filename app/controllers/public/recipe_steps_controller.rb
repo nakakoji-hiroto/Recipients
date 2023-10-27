@@ -4,6 +4,9 @@ class Public::RecipeStepsController < ApplicationController
 
   def new
     @recipe = Recipe.find(params[:recipe_id])
+    recipe_user = @recipe.user
+    #レシピの投稿者以外のユーザーが材料登録ページを表示させようとした場合、レシピ詳細ページへ遷移させる
+    identification_user(recipe_user, recipe_path(@recipe))
     @recipe_step = RecipeStep.new
     @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
     @delete_button = true
@@ -21,13 +24,11 @@ class Public::RecipeStepsController < ApplicationController
     if @recipe.recipe_steps.find_by(step: @recipe_step.step)
       flash[:notice] = "手順番号が重複しています。"
       redirect_to  new_recipe_recipe_step_path(@recipe)
-      # @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
-      # @delete_button = true
-      # render 'new'
       return
     end
     @recipe_step.recipe_id = @recipe.id
     if @recipe_step.save
+      flash[:notice] = "手順を登録しました"
       redirect_to new_recipe_recipe_step_path(@recipe)
     else
       @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
@@ -40,6 +41,7 @@ class Public::RecipeStepsController < ApplicationController
     recipe = Recipe.find(params[:recipe_id])
     recipe_step = RecipeStep.find(params[:id])
     recipe_step.destroy
+    flash[:notice] = "手順を削除しました"
     redirect_to new_recipe_recipe_step_path(recipe)
   end
 

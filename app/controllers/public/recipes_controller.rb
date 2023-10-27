@@ -1,6 +1,6 @@
 class Public::RecipesController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user ,except: [:index, :show, :genre_search]
+  before_action :ensure_guest_user ,except: [:index, :show, :genre_search, :word_search]
   def new
     @recipe = Recipe.new
     @difficulty_choice = {易しい: "1", やや易しい: "2", 普通: "3", やや難しい: "4", 難しい: "5"}
@@ -96,6 +96,9 @@ class Public::RecipesController < ApplicationController
   
   def edit
     @recipe = Recipe.find(params[:id])
+    recipe_user = @recipe.user
+    #レシピの投稿者以外のユーザーがレシピ編集ページを表示させようとした場合、レシピ詳細ページへ遷移させる
+    identification_user(recipe_user, recipe_path(@recipe))
     @tag_list = @recipe.tags.pluck(:name).join(',')
     @difficulty_choice = {易しい: "1", やや易しい: "2", 普通: "3", やや難しい: "4", 難しい: "5"}
   end
@@ -104,10 +107,6 @@ class Public::RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     tag_list=params[:recipe][:tag_name].split(/,|\.|、|・/)
     if @recipe.update(recipe_params)
-      #@old_relations = RecipeTag.where(recipe_id: @recipe.id)
-      #@old_relations.each do |relation|
-        #relation.delete
-      #end
       @recipe.save_tag(tag_list)
       flash[:notice] = "レシピを更新しました。"
       redirect_to recipe_path(@recipe)

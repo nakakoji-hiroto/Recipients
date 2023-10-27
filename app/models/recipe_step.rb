@@ -11,6 +11,5 @@ class RecipeStep < ApplicationRecord
       image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
     end
     image.variant( resize: "#{width}x#{height}^", gravity: "center", crop: "#{width}x#{height}+0+0" )
-    #image.variant(resize_to_limit: [width, height]).processed
   end
 end
