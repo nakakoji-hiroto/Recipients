@@ -8,7 +8,7 @@ class Public::UsersController < ApplicationController
     case criteria
       when 'many_recipes'
         #すべてのユーザーから「有効会員」のみ抽出 >> 各ユーザーが投稿したレシピ数の多い順に並び替え
-        filtered_users = User.where(is_active: true).where.not(email: "guest@example.com").includes(:recipes).sort_by { |user| -user.recipes.count }
+        filtered_users = User.where(is_active: true).where.not(email: "guest@example.com").includes(:recipes).sort_by { |user| -user.recipes.where(is_release: true).count }
         #Kaminariでページネーションして,viewページに渡す。
         @users = Kaminari.paginate_array(filtered_users).page(params[:page])
         flash.now[:filter_result] = "投稿レシピが多い順に表示しました。"
@@ -45,7 +45,7 @@ class Public::UsersController < ApplicationController
     unless @user.is_active
       redirect_to user_path(current_user)
     end
-    
+
     user_recipes = @user.recipes
     indicate_recipes = user_recipes.where(is_release: true)
     # 公開中のレシピのみページネーションして表示する
