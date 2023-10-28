@@ -228,7 +228,7 @@ end
 Recipe.find_or_create_by!(title: "伊勢海老のパスタ") do |recipe|
   recipe.user_id = 5
   recipe.genre_id = 2
-  recipe.catch_copy = "伊勢海老のがソースに豊かな風味とコクを与えます"
+  recipe.catch_copy = "伊勢海老がソースに豊かな風味とコクを与えます"
   recipe.difficulty = "5"
   recipe.image = ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/伊勢海老パスタ.jpg"), filename:"伊勢海老パスタ.jpg")
 end
