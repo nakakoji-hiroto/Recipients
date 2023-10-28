@@ -14,7 +14,6 @@ class Public::RecipesController < ApplicationController
     @criteria_choice = {いいねが多い順に: 'favorite', 閲覧数が多い順に: 'many_views', 難易度が易しい順に: 'easy'}
     @display_choice = {　5件: 5,　10件: 10,　30件: 30,　50件: 50,　100件: 100}
     @word_search_criteria_choice = {レシピ名: 'title', キャッチコピー: 'catch_copy'}
-    @new_recipes = Recipe.order('id DESC').limit(3)
     criteria = params[:criteria]
     display = params[:display]
     
@@ -62,20 +61,7 @@ class Public::RecipesController < ApplicationController
         current_user.view_counts.create(recipe_id: @recipe.id)
       end
     end
-    case @recipe.difficulty
-      when "1"
-        @recipe_difficulty = "易しい"
-      when "2"
-        @recipe_difficulty = "やや易しい"
-      when "3"
-        @recipe_difficulty = "普通"
-      when "4"
-        @recipe_difficulty = "やや難しい"
-      when "5"
-        @recipe_difficulty = "難しい"
-      else
-        @recipe_difficulty = "未設定"
-    end
+    @recipe_difficulty = @recipe.difficulty_judgment
     @recipe_tags = @recipe.tags
   end
   

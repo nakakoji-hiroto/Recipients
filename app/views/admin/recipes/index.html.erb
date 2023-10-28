@@ -27,42 +27,7 @@
       <% end %>
     </div>
     <div class="col-md-11 col-12 mx-md-auto mx-lg-auto my-2 d-flex flex-wrap">
-      <% @recipes.each do |recipe| %>
-        <div class="card recipe_card admin_recipe_card ml-2 mt-2 p-3 d-flex">
-          <div class="row">
-            <div class="col-3">
-              <%= link_to admin_recipe_path(recipe) do %>
-                <%= image_tag recipe.get_recipe_image(100, 100) %>
-              <% end %>
-            </div>
-            <div class="col-8 offset-1">
-              <% unless recipe.is_release %>
-                <strong><span class="text-danger ml-3">※非公開</span></strong><br>
-              <% end %>
-              <strong><%= link_to recipe.title, admin_recipe_path(recipe) %></strong>
-              💖<span class="text-danger"><%= recipe.favorites.count %></span><span> 👀<%= recipe.view_counts.count %></span>
-              <br>
-              <% case recipe.difficulty %>
-                <% when "1" %>
-                  難易度：易しい
-                <% when "2" %>
-                  難易度：やや易しい
-                <% when "3" %>
-                  難易度：普通
-                <% when "4" %>
-                  難易度：やや難しい
-                <% when "5" %>
-                  難易度：難しい
-                <% else %>
-                  難易度：未設定
-              <% end %>
-              <br>
-              <strong><%= recipe.catch_copy %></strong><br>
-              投稿者：<%= recipe.user.name %>さん
-            </div>
-          </div>
-        </div>
-      <% end %>
+      <%= render 'admin/recipes/index', recipes: @recipes %>
     </div>
   </div>
   <div class="d-flex justify-content-center mt-3"><%= paginate @recipes %></div>

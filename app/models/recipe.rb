@@ -44,5 +44,22 @@ class Recipe < ApplicationRecord
       self.tags << new_recipe_tag
     end
   end
+  
+  def difficulty_judgment
+    case self.difficulty
+      when "1"
+        "易しい"
+      when "2"
+       "やや易しい"
+      when "3"
+        "普通"
+      when "4"
+        "やや難しい"
+      when "5"
+        "難しい"
+      else
+        "未設定"
+    end
+  end
 
 end

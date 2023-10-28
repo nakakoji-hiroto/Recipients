@@ -24,39 +24,13 @@ class Admin::RecipeCommentsController < ApplicationController
     @recipe_comment = RecipeComment.find(params[:id])
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_tags = @recipe.tags
-    case @recipe.difficulty
-      when "1"
-        @recipe_difficulty = "易しい"
-      when "2"
-        @recipe_difficulty = "やや易しい"
-      when "3"
-        @recipe_difficulty = "普通"
-      when "4"
-        @recipe_difficulty = "やや難しい"
-      when "5"
-        @recipe_difficulty = "難しい"
-      else
-        @recipe_difficulty = "未設定"
-    end
+    @recipe_difficulty = @recipe.difficulty_judgment
   end
   
   def update
     @recipe = Recipe.find(params[:recipe_id])
     @recipe_comment = @recipe.recipe_comments.find(params[:id])
-    case @recipe.difficulty
-      when "1"
-        @recipe_difficulty = "易しい"
-      when "2"
-        @recipe_difficulty = "やや易しい"
-      when "3"
-        @recipe_difficulty = "普通"
-      when "4"
-        @recipe_difficulty = "やや難しい"
-      when "5"
-        @recipe_difficulty = "難しい"
-      else
-        @recipe_difficulty = "未設定"
-    end
+    @recipe_difficulty = @recipe.difficulty_judgment
     if @recipe_comment.is_release
       @recipe_comment.is_release = false
       @recipe_comment.save
