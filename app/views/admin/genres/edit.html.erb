@@ -1,15 +1,6 @@
 <div class="container mx-auto">
   <h3><span class="page_title col-10 ml-4">ジャンル編集</span></h3>
-  <% if @genre.errors.any? %>
-        <ul class="alert alert-danger" role="alert">
-          <h6 class="alert-heading">
-            <%= @genre.errors.count %>件のエラーが発生しました
-          </h6>
-          <% @genre.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
-  <% end %>
+  <%= render 'layouts/error', object: @genre %>
   <div class="row">
     <div class="col-md-10 col-12 mt-3">
       <%= form_with model: @genre do |f| %>
