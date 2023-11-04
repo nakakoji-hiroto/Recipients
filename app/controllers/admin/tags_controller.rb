@@ -5,7 +5,7 @@ class Admin::TagsController < ApplicationController
     @tag = Tag.find_by(name: params[:name])
     if @tag.present?
       tag_recipes = @tag.recipes
-      @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page]).per(10)
+      @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page])
       @tag_recipes_count = tag_recipes.count
       @tag_search = true
     elsif params[:name].blank?

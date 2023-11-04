@@ -1,12 +1,12 @@
 <% recipes.each do |recipe| %>
-  <div class="card recipe_card admin_recipe_card ml-2 mb-3 p-3 d-flex">
+  <div class="card recipe_card mx-3 p-3 mb-3 shadow-lg rounded-3 d-flex">
     <div class="row">
-      <div class="col-3">
+      <div class="col-sm-4 col-12">
         <%= link_to admin_recipe_path(recipe) do %>
           <%= image_tag recipe.get_recipe_image(100, 100) %>
         <% end %>
       </div>
-      <div class="col-8 offset-1">
+      <div class="col-sm-8 col-12">
         <% unless recipe.is_release %>
           <strong><span class="text-danger ml-3">※非公開</span></strong><br>
         <% end %>

@@ -9,7 +9,7 @@ class Public::TagsController < ApplicationController
       @tag_search = true
     #非公開になっているレシピの件数をカウントする
     @recipe_count = tag_recipes.where(is_release: true).count
-    @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page]).per(10)
+    @tag_recipes = Kaminari.paginate_array(tag_recipes).page(params[:page])
     elsif params[:name].blank?
       flash[:alert] = "※タグ名が入力されていません"
       redirect_to request.referer

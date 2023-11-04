@@ -8,9 +8,10 @@ class Public::RecipesController < ApplicationController
 
   def index
     @recipe = Recipe.new
+    # 公開中のレシピのみ抽出する
     indicate_recipes = Recipe.where(is_release: true)
     # 公開中のレシピのみページネーションして表示する
-    @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
+    #@recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
     @criteria_choice = {いいねが多い順に: 'favorite', 閲覧数が多い順に: 'many_views', 難易度が易しい順に: 'easy'}
     @display_choice = {　5件: 5,　10件: 10,　30件: 30,　50件: 50,　100件: 100}
     @word_search_criteria_choice = {レシピ名: 'title', キャッチコピー: 'catch_copy'}
@@ -45,6 +46,7 @@ class Public::RecipesController < ApplicationController
         flash.now[:filter_result] = "難易度が易しい順に#{display}件、表示しました。"
         @filtered = true
       else
+        # 公開中のレシピのみページネーションして表示する
         @recipes = Kaminari.paginate_array(indicate_recipes).page(params[:page])
         @filtered = false
     end
