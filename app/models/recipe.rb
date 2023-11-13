@@ -45,7 +45,7 @@ class Recipe < ApplicationRecord
     end
   end
   
-  def difficulty_judgment
+  def difficulty_judgment #difficultyカラムのvalueを対応する文字列に変換する
     case self.difficulty
       when "1"
         "易しい"

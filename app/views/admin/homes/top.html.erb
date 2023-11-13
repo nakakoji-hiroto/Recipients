@@ -5,7 +5,7 @@
     <%= form_with url: admin_path, method: :get do |f| %>
       <div class="form-group form-inline d-flex justify-content-between ml-5">
         <%= f.label :criteria, 'ユーザーを並べ替え', class: "tag_label mr-3" %>
-        <%= f.select(:criteria, @criteria_choice, { include_blank: "絞り込み基準を選択" }, :required => true) %>
+        <%= f.select(:criteria, @criteria_choice, { include_blank: "並べ替え基準を選択" }, :required => true) %>
         <%= f.submit "並べ替える", class:"btn btn-sm btn-success border border-dark ml-3 p-1" %>
         <% if @filtered %>
           <%= link_to '表示をリセット', admin_path, class:"btn btn-sm btn-danger border border-dark ml-2" %>

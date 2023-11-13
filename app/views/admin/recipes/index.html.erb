@@ -4,7 +4,7 @@
     <div class="form-group form-inline d-flex ml-5 mt-1">
       <%= f.label :word_search_criteria, 'キーワード', class: "word_search_label mr-3" %>
       <%= f.select :word_search_criteria, @word_search_criteria_choice %>　に　
-      <%= f.text_field(:word, class:"form-control w-sm-25 mt-2 border border-dark", autofocus: true, autocomplete: "key_word", placeholder: "検索ワードを入力", :required => true) %>　を含む
+      <%= f.text_field(:word, class:"form-control w-sm-25 mt-2 border border-dark", autocomplete: "key_word", placeholder: "検索ワードを入力", :required => true) %>　を含む
       <%= f.submit "検索する", class:"btn btn-sm btn-success border border-dark ml-3 mt-2 p-1" %>
     </div>
   <% end %>
@@ -20,7 +20,7 @@
       <%= form_with model: @tag, url: admin_tag_search_path, method: :get do |f| %>
         <div class="form-group form-inline d-flex justify-content-between">
           <%= f.label :name, 'タグ', class: "tag_label ml-5 mr-3" %>
-          <%= f.text_field(:name, class:"form-control w-sm-50 border border-dark", autofocus: true, autocomplete: "name", placeholder: "タグ名を入力", :required => true) %>
+          <%= f.text_field(:name, class:"form-control w-sm-50 border border-dark", autocomplete: "name", placeholder: "タグ名を入力", :required => true) %>
           <%= f.submit "検索する", class:"btn btn-sm btn-secondary border border-dark mt-2 ml-3 p-1" %>
           <sapn class="text-light bg-danger offset-3"><%= flash[:alert] %></sapn>
         </div>
