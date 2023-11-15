@@ -27,7 +27,8 @@
 - 自身のオリジナルレシピを他のユーザーに共有したいとき
 
 ## 設計書
-後日作成予定
+- ER図 [design_materials/レシピエント_ER図.drawio](ER図)
+- テーブル定義書 [design_materials/レシピエント_テーブル定義書](テーブル定義書)
 
 ## 開発環境
 - OS：Amazon Linux release 2
