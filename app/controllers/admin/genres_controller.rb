@@ -31,12 +31,6 @@ class Admin::GenresController < ApplicationController
   
   private
   
-  def check_admin_sign_in
-    unless admin_signed_in?
-      redirect_to root_path
-    end
-  end
-  
   def genre_params
     params.require(:genre).permit(:name)
   end

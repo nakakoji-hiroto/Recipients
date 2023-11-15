@@ -3,7 +3,6 @@ class Admin::RecipeCommentsController < ApplicationController
   
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    @recipe_comment = RecipeComment.new
     @choices = {評価の高い順に: 'high_rating', 日付の新しい順に: 'new', 日付の古い順に: 'old'}
     sort = params[:sort]
     case sort

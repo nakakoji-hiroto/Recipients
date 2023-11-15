@@ -3,6 +3,6 @@ class Admin::RecipeStepsController < ApplicationController
   
   def index
     @recipe = Recipe.find(params[:recipe_id])
-    @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC').per(10)
+    @recipe_steps = @recipe.recipe_steps.page(params[:page]).order('step ASC')
   end
 end

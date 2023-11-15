@@ -27,7 +27,7 @@ class Admin::HomesController < ApplicationController
         flash.now[:filter_result] = "フォロワー数が多い順に表示しました。"
         @filtered = true
       else
-        @users = User.page(params[:page]).per(10)
+        @users = User.page(params[:page])
         @filtered = false
     end
   end
