@@ -1,0 +1,4 @@
+<% if current_user != user && user.is_active && current_user.followed_by?(user) && user.followed_by?(current_user) %>
+  <p class="mt-4"><strong>※<%= user.name %>さんと相互フォロー状態のため、ＤＭ機能が使用可能です！</strong></p>
+  <%= link_to 'ＤＭページへ', chat_path(user.id), class: "btn btn-primary border border-dark" %>
+<% end %>

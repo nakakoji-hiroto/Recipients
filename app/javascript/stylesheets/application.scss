@@ -49,6 +49,10 @@ main {
   min-height: 180px;
 }
 
+.recipe_material_table{
+  min-width: 300px;
+}
+
 .step_card {
   width: 160px;
   max-height: 240px;
@@ -76,11 +80,23 @@ main {
   background-color: #FFFFEE;
 }
 
-.title_field, .catch_copy_area, .tag_field {
+.title_field, .catch_copy_area, .tag_field, .chat_area {
   min-width: 325px;
 }
 
 .password_label {
   width: 112px;
+}
+
+.my_message {
+  background-color: #99FF99;
+}
+
+.my_message_group {
+  text-align: left;
+}
+
+.opponent_message_group {
+  text-align: right;
 }
 

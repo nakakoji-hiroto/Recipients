@@ -7,6 +7,7 @@ ja:
       recipe_material: 材料
       recipe_comment: レビュー
       recipe_step: 調理手順
+      chat: チャット
     attributes:
       user:
         name: ユーザー名
@@ -25,6 +26,8 @@ ja:
       recipe_step:
         step: 手順番号
         explanation: 作業内容
+      chat:
+        message: メッセージ
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

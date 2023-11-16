@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update] do
       resource :user_relationships, only: [:create, :destroy]
     end
+    resources :chats, only: [:show, :create]
     resources :recipes do
       resources :recipe_materials, only: [:new, :index, :create, :destroy]
       resources :recipe_steps, only: [:new, :index, :create, :destroy]

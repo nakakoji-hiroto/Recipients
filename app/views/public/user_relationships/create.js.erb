@@ -1,1 +1,2 @@
 $('#follow_user_<%= @user.id %>').html("<%= j(render "public/users/show", user: @user) %>");
+$('#dm_user_<%= @user.id %>').html("<%= j(render "public/users/dm_link", user: @user) %>");

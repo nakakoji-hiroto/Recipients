@@ -14,6 +14,10 @@ class User < ApplicationRecord
 
   has_many :passive_relationships, class_name: "UserRelationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followeds, through: :passive_relationships, source: :follower
+  
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
 
   VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)(?=.*?[\W_])[!-~]{8,}+\z/i.freeze
   validates :password, format: { with: VALID_PASSWORD_REGEX, message: 'は半角英数記号を各1文字以上含める必要があります', on: :create }
