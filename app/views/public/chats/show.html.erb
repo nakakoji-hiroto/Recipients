@@ -22,10 +22,12 @@
         <% @chats.each do |chat| %>
           <% if chat.user_id == current_user.id %>
           <div class="my_message_group mb-4">
+            <p><%= l chat.created_at %></p>
             <span class="my_message bouder rounded p-1 mb-2"><%= chat.message %></span>
           </div>
           <% else %>
           <div class="opponent_message_group mb-4">
+            <p><%= l chat.created_at %></p>
             <span class="opponent_message bg-light bouder rounded p-1 mb-2"><%= chat.message %></span>
           </div>
           <% end %>
