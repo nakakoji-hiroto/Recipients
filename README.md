@@ -27,8 +27,12 @@
 - 自身のオリジナルレシピを他のユーザーに共有したいとき
 
 ## 設計書
+- [UI Flows](/design_materials/レシピエント_UiFlow.pdf)
+- [ワイヤーフレーム（会員側）](/design_materials/レシピエントwire_user.pdf)
+- [ワイヤーフレーム（管理側](/design_materials/レシピエントwire_admin.pdf)
 - [ER図](/design_materials/レシピエント_ER図.drawio.png)
 - [テーブル定義書](/design_materials/レシピエント_テーブル定義書.pdf)
+- [詳細設詳細設計書](/design_materials/レシピエント_詳細設計書.pdf)
 
 ## 開発環境
 - OS：Amazon Linux release 2
