@@ -1,8 +1,10 @@
 <div class="is_release_update">
   <% if recipe.is_release %>
-    <%= link_to 'このレシピを非公開にする', admin_recipe_path(recipe), method: :patch, class: "btn btn-danger border border-dark mt-2", remote: true %>
+    <%= link_to 'このレシピを非公開にする', admin_recipe_path(recipe), method: :patch, class: "btn btn-danger border border-dark mt-2", remote: true,
+    data: { confirm: "このレシピを非公開にします。\nよろしいですか？" }%>
   <% else %>
-    <%= link_to 'このレシピを公開する', admin_recipe_path(recipe), method: :patch, class: "btn btn-success border border-dark mt-2", remote: true %>
+    <%= link_to 'このレシピを公開する', admin_recipe_path(recipe), method: :patch, class: "btn btn-success border border-dark mt-2", remote: true,
+    data: { confirm: "このレシピを公開します。\nよろしいですか？" }%>
   <% end %>
 </div>
-<div class="is_release_changed_message"><%= flash.now[:is_release_changed] %></div>
+<div class="is_release_changed_message"><strong><%= flash.now[:is_release_changed] %></strong></div>

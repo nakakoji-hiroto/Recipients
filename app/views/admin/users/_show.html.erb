@@ -28,10 +28,16 @@
       <th>ステータス</th>
       <% if user.is_active %>
         <td>有効会員</td>
-        <td><%= link_to '利用停止にする', admin_user_path(user), class: "btn btn-sm btn-danger border border-dark", method: :patch, remote: true %></td>
+        <td>
+          <%= link_to '利用停止にする', admin_user_path(user), class: "btn btn-sm btn-danger border border-dark", method: :patch, remote: true,
+          data: { confirm: "この会員のステータスを利用停止に変更します。\nよろしいですか？" } %>
+        </td>
       <% else %>
         <td class="text-danger">利用停止</td>
-        <td><%= link_to '有効会員にする', admin_user_path(user), class: "btn btn-sm btn-success border border-dark", method: :patch, remote: true %></td>
+        <td>
+          <%= link_to '有効会員にする', admin_user_path(user), class: "btn btn-sm btn-success border border-dark", method: :patch, remote: true,
+          data: { confirm: "この会員のステータスを有効会員に変更します。\nよろしいですか？" }%>
+        </td>
       <% end %>
   </tr>
 </table>

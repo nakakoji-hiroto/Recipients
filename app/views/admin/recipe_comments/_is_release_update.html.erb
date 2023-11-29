@@ -48,9 +48,11 @@
 </div>
 <div class="review_is_release_update">
   <% if recipe_comment.is_release %>
-    <%= link_to 'このレビューを非公開にする', admin_recipe_recipe_comment_path(recipe, recipe_comment), method: :patch, class: "btn btn-danger border border-dark mt-2" %>
+    <%= link_to 'このレビューを非公開にする', admin_recipe_recipe_comment_path(recipe, recipe_comment), method: :patch, class: "btn btn-danger border border-dark mt-2",
+    data: { confirm: "このレビューを非公開にします。\nよろしいですか？" }%>
   <% else %>
-    <%= link_to 'このレビューを公開する', admin_recipe_recipe_comment_path(recipe, recipe_comment), method: :patch, class: "btn btn-success border border-dark mt-2" %>
+    <%= link_to 'このレビューを公開する', admin_recipe_recipe_comment_path(recipe, recipe_comment), method: :patch, class: "btn btn-success border border-dark mt-2",
+    data: { confirm: "このレビューを公開します。\nよろしいですか？" }%>
   <% end %>
 </div>
-<div class="review_is_release_changed_message"><%= flash.now[:review_is_release_changed] %></div>
+<div class="review_is_release_changed_message"><strong><%= flash.now[:review_is_release_changed] %></strong></div>
