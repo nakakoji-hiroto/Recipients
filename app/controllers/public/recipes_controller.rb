@@ -107,9 +107,14 @@ class Public::RecipesController < ApplicationController
   
   def destroy
     recipe = Recipe.find(params[:id])
-    recipe.destroy
-    flash[:notice] = "レシピを削除しました。"
-    redirect_to user_path(current_user)
+    #レシピの投稿者以外のユーザーがレシピを削除しようとした場合、レシピ詳細ページへ遷移させる
+    if recipe.user != current_user
+      redirect_to recipe_path(recipe)
+    else
+      recipe.destroy
+      flash[:notice] = "レシピを削除しました。"
+      redirect_to user_path(current_user)
+    end
   end
   
   def genre_search
