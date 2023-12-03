@@ -35,8 +35,12 @@ class Public::RecipeMaterialsController < ApplicationController
   def destroy
     recipe = Recipe.find(params[:recipe_id])
     recipe_material = RecipeMaterial.find(params[:id])
-    recipe_material.destroy
-    redirect_to new_recipe_recipe_material_path(recipe)
+    if recipe.user != current_user
+      redirect_to recipe_path(recipe)
+    else
+      recipe_material.destroy
+      redirect_to new_recipe_recipe_material_path(recipe)
+    end
   end
   
   private

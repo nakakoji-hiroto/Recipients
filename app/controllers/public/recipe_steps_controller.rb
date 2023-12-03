@@ -40,9 +40,13 @@ class Public::RecipeStepsController < ApplicationController
   def destroy
     recipe = Recipe.find(params[:recipe_id])
     recipe_step = RecipeStep.find(params[:id])
-    recipe_step.destroy
-    flash[:notice] = "手順を削除しました"
-    redirect_to new_recipe_recipe_step_path(recipe)
+    if recipe.user != current_user
+      redirect_to recipe_path(recipe)
+    else
+      recipe_step.destroy
+      flash[:notice] = "手順を削除しました"
+      redirect_to new_recipe_recipe_step_path(recipe)
+    end
   end
 
   private

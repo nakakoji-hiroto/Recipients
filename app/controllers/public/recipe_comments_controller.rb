@@ -80,9 +80,13 @@ class Public::RecipeCommentsController < ApplicationController
 
   def destroy
     recipe_comment = RecipeComment.find(params[:id])
-    recipe_comment.delete
-    flash[:notice] = "レビューを削除しました"
-    redirect_to recipe_path(params[:recipe_id])
+    if recipe_comment.user != current_user
+      redirect_to recipe_recipe_comment_path(params[:recipe_id], params[:id])
+    else
+      recipe_comment.delete
+      flash[:notice] = "レビューを削除しました"
+      redirect_to recipe_path(params[:recipe_id])
+    end
   end
 
   private
